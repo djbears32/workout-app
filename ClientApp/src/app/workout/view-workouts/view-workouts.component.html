@@ -1,0 +1,13 @@
+<p>view-workouts works!</p>
+
+
+<mat-table class="mat-elevation-z8" [dataSource]="dataSource">
+    <mat-header-cell *matHeaderCellDef>Exercise Number</mat-header-cell>
+    <mat-cell *matCellDef="let entry">{{ entry.WorkoutId }}</mat-cell>
+
+    <mat-header-cell *matHeaderCellDef>Exercise Name</mat-header-cell>
+    <mat-cell *matCellDef="let entry">{{ entry.WorkoutName }}</mat-cell>
+
+    <mat-header-cell *matHeaderCellDef>Muscle Group</mat-header-cell>
+    <mat-cell *matCellDef="let entry">{{ entry.MuscleGroupId }}</mat-cell>
+</mat-table>
