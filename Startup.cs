@@ -31,6 +31,10 @@ namespace workout_app
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddTransient<DAL.Repositories.IExerciseRepository, DAL.Repositories.ExcerciseRepository>();
+
+            services.AddTransient<API.IExerciseAPI, API.ExerciseAPI>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

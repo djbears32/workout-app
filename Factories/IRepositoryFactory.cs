@@ -1,4 +1,4 @@
-using workout_app.Repositories;
+using workout_app.DAL.Repositories;
 
 namespace workout_app.Factories
 {

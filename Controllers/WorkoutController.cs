@@ -8,6 +8,7 @@ using workout_app.ViewModels;
 
 namespace workout_app.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class WorkoutController : Controller
     {
@@ -21,7 +22,7 @@ namespace workout_app.Controllers
         }
 
         [HttpGet("getexercises")]
-        public IActionResult GetExercises()
+        public ActionResult GetExercises()
         {
             try
             {

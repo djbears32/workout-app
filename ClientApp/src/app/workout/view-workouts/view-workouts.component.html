@@ -1,13 +1,30 @@
 <p>view-workouts works!</p>
 
+<mat-expansion-panel>
 
-<mat-table class="mat-elevation-z8" [dataSource]="dataSource">
-    <mat-header-cell *matHeaderCellDef>Exercise Number</mat-header-cell>
-    <mat-cell *matCellDef="let entry">{{ entry.WorkoutId }}</mat-cell>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="exerciseId">
+        <th mat-header-cell *matHeaderCellDef>Exercise Number</th>
+        <tb mat-cell *matCellDef="let entry">{{ entry.ExerciseId }}</tb>
+    </ng-container>
 
-    <mat-header-cell *matHeaderCellDef>Exercise Name</mat-header-cell>
-    <mat-cell *matCellDef="let entry">{{ entry.WorkoutName }}</mat-cell>
+    <ng-container matColumnDef="exerciseName">
+        <th mat-header-cell *matHeaderCellDef>Exercise Name</th>
+        <tb mat-cell *matCellDef="let entry">{{ entry.ExerciseName }}</tb>
+    </ng-container>
 
-    <mat-header-cell *matHeaderCellDef>Muscle Group</mat-header-cell>
-    <mat-cell *matCellDef="let entry">{{ entry.MuscleGroupId }}</mat-cell>
-</mat-table>
+    <ng-container matColumnDef="muscleGroupId">
+        <th mat-header-cell *matHeaderCellDef>Muscle Group</th>
+        <tb mat-cell *matCellDef="let entry">{{ entry.MuscleGroupId }}</tb>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator class="mat-elevation-z8"
+                    [pageSize]="3"
+                    [pageSizeOptions]="[3,5,10]"
+                    [showFirstLastButtons]="true">
+</mat-paginator>
+
+</mat-expansion-panel>

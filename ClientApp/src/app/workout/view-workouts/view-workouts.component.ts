@@ -26,7 +26,7 @@ export class ViewWorkoutsComponent implements OnInit {
   }
 
   refreshExercises() {
-    this.workoutService.getExercises().pipe(
+     this.workoutService.getExercises().pipe(
       finalize(() => this.isLoadingData = false)
     )
       .subscribe((Exercises: IExercises[]) => {

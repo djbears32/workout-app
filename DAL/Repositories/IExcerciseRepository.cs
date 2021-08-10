@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace workout_app.Repositories
+namespace workout_app.DAL.Repositories
 {
     public interface IExerciseRepository : IRepository<DAL.Models.Exercise>
     {

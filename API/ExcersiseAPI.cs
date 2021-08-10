@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Collections.Generic;
-using workout_app.Repositories;
 using workout_app.ViewModels;
 
 namespace workout_app.API
@@ -8,14 +7,11 @@ namespace workout_app.API
     public class ExerciseAPI : IExerciseAPI
     {
         //DAL.UnitOfWork.IExerciseUnitOfWork exerciseUOW;
-        Factories.IRepositoryFactory repositoryFactory;
-        Repositories.IExerciseRepository exerciseRepo;
+        DAL.Repositories.IExerciseRepository exerciseRepo;
 
         public ExerciseAPI(
-            Factories.IRepositoryFactory repositoryFactory,
-            Repositories.IExerciseRepository exerciseRepo)
+            DAL.Repositories.IExerciseRepository exerciseRepo)
             {
-                this.repositoryFactory = repositoryFactory;
                 this.exerciseRepo = exerciseRepo;
             }
         public List<ViewModels.ExerciseViewModel> GetExercises()
