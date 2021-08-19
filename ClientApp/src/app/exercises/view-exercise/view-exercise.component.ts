@@ -6,11 +6,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { finalize } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-view-workouts',
-  templateUrl: './view-workouts.component.html',
-  styleUrls: ['./view-workouts.component.css']
+  selector: 'app-view-exercise',
+  templateUrl: './view-exercise.component.html',
+  styleUrls: ['./view-exercise.component.css']
 })
-export class ViewWorkoutsComponent implements OnInit {
+export class ViewExerciseComponent implements OnInit {
   dataSource: MatTableDataSource<IExercises>;
   errorMessage: string;
   displayedColumns = ['exerciseId','exerciseName','muscleGroupId'];

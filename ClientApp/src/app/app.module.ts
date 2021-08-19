@@ -10,7 +10,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BannerComponent } from './banner/banner.component';
 import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
-import { ViewWorkoutsComponent } from './workout/view-workouts/view-workouts.component';
+import { ViewExerciseComponent } from './exercises/view-exercise/view-exercise.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FetchDataComponent,
     BannerComponent,
     AddWorkoutComponent,
-    ViewWorkoutsComponent
+    ViewExerciseComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,7 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'add-workout', component: AddWorkoutComponent },
-      { path: 'view-workout', component: ViewWorkoutsComponent },
+      { path: 'view-workout', component: ViewExerciseComponent },
     ]),
     BrowserAnimationsModule
   ],
