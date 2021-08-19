@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IExercises } from 'src/app/models/IExcercises';
 import { WorkoutService } from '../../services/workout.services'
 import { MatPaginator} from '@angular/material/paginator';

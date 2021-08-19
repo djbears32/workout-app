@@ -12,6 +12,8 @@ import { BannerComponent } from './banner/banner.component';
 import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
 import { ViewExerciseComponent } from './exercises/view-exercise/view-exercise.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddExerciseComponent } from './exercises/add-exercise/add-exercise.component';
+import { DeleteExerciseComponent } from './exercises/delete-exercise/delete-exercise.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FetchDataComponent,
     BannerComponent,
     AddWorkoutComponent,
-    ViewExerciseComponent
+    ViewExerciseComponent,
+    AddExerciseComponent,
+    DeleteExerciseComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,7 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'add-workout', component: AddWorkoutComponent },
-      { path: 'view-workout', component: ViewExerciseComponent },
+      { path: 'view-exercise', component: ViewExerciseComponent },
     ]),
     BrowserAnimationsModule
   ],

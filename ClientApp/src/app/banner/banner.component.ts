@@ -17,7 +17,7 @@ export class BannerComponent {
   }
 
 
-  constructor() { }
+  constructor(  ) { }
 
   ngOnInit() {
   }
