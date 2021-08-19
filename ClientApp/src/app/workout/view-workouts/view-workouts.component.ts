@@ -11,11 +11,9 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./view-workouts.component.css']
 })
 export class ViewWorkoutsComponent implements OnInit {
-
-  @Input() exerciseData: IExercises;
   dataSource: MatTableDataSource<IExercises>;
   errorMessage: string;
-  displayedColumns = ["exerciseId","exerciseName","muscleGroupId"];
+  displayedColumns = ['exerciseId','exerciseName','muscleGroupId'];
   isLoadingData = true;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
 
@@ -29,8 +27,8 @@ export class ViewWorkoutsComponent implements OnInit {
      this.workoutService.getExercises().pipe(
       finalize(() => this.isLoadingData = false)
     )
-      .subscribe((Exercises: IExercises[]) => {
-        this.dataSource = new MatTableDataSource<IExercises>(Exercises)
+      .subscribe((exercises: IExercises[]) => {
+        this.dataSource = new MatTableDataSource<IExercises>(exercises)
         this.dataSource.paginator = this.paginator
       },
         (error: Error) => this.errorMessage = error.message);

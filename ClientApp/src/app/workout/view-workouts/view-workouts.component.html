@@ -1,11 +1,11 @@
 <p>view-workouts works!</p>
 
 <mat-expansion-panel>
-
+   
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="exerciseId">
         <th mat-header-cell *matHeaderCellDef>Exercise Number</th>
-        <tb mat-cell *matCellDef="let entry">{{ entry.ExerciseId }}</tb>
+        <tb mat-cell *matCellDef="let entry">{{ entry.exerciseId }}</tb>
     </ng-container>
 
     <ng-container matColumnDef="exerciseName">
