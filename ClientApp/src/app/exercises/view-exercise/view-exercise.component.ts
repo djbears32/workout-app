@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IExercises } from 'src/app/models/IExcercises';
 import { WorkoutService } from '../../services/workout.services'
+import { finalize } from 'rxjs/operators';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatSort, MatTableDataSource } from '@angular/material';
 
@@ -21,13 +22,13 @@ export class ViewExerciseComponent implements OnInit {
   constructor(private workoutService: WorkoutService) { }
 
   ngOnInit() { 
-    this.getExer();
-   }
-
-   public getExer = () => {
-     this.workoutService.getExercises()
-     .subscribe(res => {
-       this.dataSource.data = res as IExercises[];
-     })
+    this.workoutService.getExercises().pipe(
+      finalize(() => this.isLoadingData = false)
+    )
+      .subscribe((exercises: IExercises[]) => {
+        this.dataSource = new MatTableDataSource<IExercises>(exercises)
+        //this.dataSource.paginator = this.paginator
+      },
+        (error: Error) => this.errorMessage = error.message);;
    }
 }
