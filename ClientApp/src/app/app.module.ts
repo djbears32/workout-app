@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { Component, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { MatTableModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -31,6 +33,8 @@ import { DeleteExerciseComponent } from './exercises/delete-exercise/delete-exer
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    MatTableModule,
+    MatMenuModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
