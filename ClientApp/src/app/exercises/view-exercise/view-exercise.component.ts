@@ -3,7 +3,6 @@ import { IExercises } from 'src/app/models/IExcercises';
 import { WorkoutService } from '../../services/workout.services'
 import { MatPaginator} from '@angular/material/paginator';
 import { MatSort, MatTableDataSource } from '@angular/material';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-view-exercise',
@@ -16,8 +15,8 @@ export class ViewExerciseComponent implements OnInit {
 
   dataSource: MatTableDataSource<IExercises>;
   displayedColumns = ['exerciseId','exerciseName','muscleGroupId'];
-  @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  //@ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
+  //@ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private workoutService: WorkoutService) { }
 
