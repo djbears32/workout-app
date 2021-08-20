@@ -21,14 +21,18 @@ export class ViewExerciseComponent implements OnInit {
 
   constructor(private workoutService: WorkoutService) { }
 
-  ngOnInit() { 
-    this.workoutService.getExercises().pipe(
+  ngOnInit() {
+    this.refreshExercises();
+  }
+
+  refreshExercises() {
+     this.workoutService.getExercises().pipe(
       finalize(() => this.isLoadingData = false)
     )
       .subscribe((exercises: IExercises[]) => {
         this.dataSource = new MatTableDataSource<IExercises>(exercises)
         //this.dataSource.paginator = this.paginator
       },
-        (error: Error) => this.errorMessage = error.message);;
-   }
+        (error: Error) => this.errorMessage = error.message);
+    }
 }

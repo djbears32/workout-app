@@ -5,17 +5,17 @@
 
     <ng-container matColumnDef="exerciseId">
         <th mat-header-cell *matHeaderCellDef>Exercise Number</th>
-        <td mat-cell *matCellDef="let entry">{{ entry.id }}</td>
+        <td mat-cell *matCellDef="let entry">{{ entry.exerciseId }}</td>
     </ng-container>
 
     <ng-container matColumnDef="exerciseName">
         <th mat-header-cell *matHeaderCellDef>Exercise Name</th>
-        <td mat-cell *matCellDef="let entry">{{ entry.name }}</td>
+        <td mat-cell *matCellDef="let entry">{{ entry.exerciseName }}</td>
     </ng-container>
 
     <ng-container matColumnDef="muscleGroupId">
         <th mat-header-cell *matHeaderCellDef>Muscle Group</th>
-        <td mat-cell *matCellDef="let entry">{{ entry.group }}</td>
+        <td mat-cell *matCellDef="let entry">{{ entry.muscleGroupId }}</td>
     </ng-container>
     
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
