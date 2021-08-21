@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { IExercises } from 'src/app/models/IExcercises';
 import { WorkoutService } from '../../services/workout.services'
 import { finalize } from 'rxjs/operators';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatSort, MatTableDataSource } from '@angular/material';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-view-exercise',
@@ -13,9 +14,13 @@ import { MatSort, MatTableDataSource } from '@angular/material';
 export class ViewExerciseComponent implements OnInit {
   errorMessage: string;
   isLoadingData = true;
+  addExercise = false;
 
   dataSource: MatTableDataSource<IExercises>;
   displayedColumns = ['exerciseId','exerciseName','muscleGroupId'];
+
+  @Output() editModeChanged = new EventEmitter();
+
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -40,5 +45,9 @@ export class ViewExerciseComponent implements OnInit {
 
     applyFilter(filterValue: string) {
       this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    toggleAdd() {
+      this.addExercise = !this.addExercise;
     }
 }
