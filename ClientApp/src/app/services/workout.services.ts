@@ -22,7 +22,7 @@ export class WorkoutService {
     updateExercises(exerciseData, muscleGroupData)
     {
         var apiUrl = 'api/workout/addexercises';
-        return this.httpClient.get<IExercises[], IMuscleGroups[]>(apiUrl);
+        return this.httpClient.get<IExercises[]>(apiUrl);
     }
 
 

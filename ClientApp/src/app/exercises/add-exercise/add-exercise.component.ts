@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EventEmitter } from 'events';
 import { finalize } from 'rxjs/operators';
 
 import { IExercises } from 'src/app/models/IExcercises';
@@ -26,7 +25,7 @@ export class AddExerciseComponent implements OnInit {
   editFieldsForm = new FormGroup({
     exerciseName: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(40)])),
     muscleGroup: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(40)]))
-  })
+  });
 
   constructor(private workoutService: WorkoutService) { }
 
@@ -42,7 +41,9 @@ export class AddExerciseComponent implements OnInit {
       muscleGroupName: null
     }
 
+    this.editFieldsForm.get('exerciseId').setValue(this.exerciseData.exerciseId);
     this.editFieldsForm.get('exerciseName').setValue(this.exerciseData.exerciseName);
+    this.editFieldsForm.get('muscleGroupId').setValue(this.exerciseData.muscleGroupId);
     this.editFieldsForm.get('muscleGroupName').setValue(this.muscleGroupData.muscleGroupName);
   }
 

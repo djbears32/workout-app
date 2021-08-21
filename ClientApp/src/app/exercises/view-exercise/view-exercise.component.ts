@@ -1,10 +1,9 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { IExercises } from 'src/app/models/IExcercises';
 import { WorkoutService } from '../../services/workout.services'
 import { finalize } from 'rxjs/operators';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatSort, MatTableDataSource } from '@angular/material';
-import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-view-exercise',
@@ -14,7 +13,7 @@ import { EventEmitter } from 'events';
 export class ViewExerciseComponent implements OnInit {
   errorMessage: string;
   isLoadingData = true;
-  addExercise = false;
+  editExercise = false;
 
   dataSource: MatTableDataSource<IExercises>;
   displayedColumns = ['exerciseId','exerciseName','muscleGroupId'];
@@ -28,8 +27,7 @@ export class ViewExerciseComponent implements OnInit {
 
   ngOnInit() {
     this.refreshExercises();
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    
   }
 
   refreshExercises() {
@@ -39,6 +37,7 @@ export class ViewExerciseComponent implements OnInit {
       .subscribe((exercises: IExercises[]) => {
         this.dataSource = new MatTableDataSource<IExercises>(exercises)
         this.dataSource.paginator = this.paginator
+        this.dataSource.sort = this.sort
       },
         (error: Error) => this.errorMessage = error.message);
     }
@@ -47,7 +46,7 @@ export class ViewExerciseComponent implements OnInit {
       this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
-    toggleAdd() {
-      this.addExercise = !this.addExercise;
+    toggleEdit() {
+      this.editExercise = !this.editExercise;
     }
 }

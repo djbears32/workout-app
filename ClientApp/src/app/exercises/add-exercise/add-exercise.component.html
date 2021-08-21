@@ -24,4 +24,12 @@
         </div>
 
     </div>
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px">
+        <div>
+            <button type="submit" mat-raised-button [disabled]="editFieldsForm.invalid">Submit</button>
+        </div>
+        <div>
+            <button type="button" mat-raised-button (click)="cancelEdit()">Cancel</button>
+        </div>
+    </div>
 </form>
