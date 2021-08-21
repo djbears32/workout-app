@@ -16,13 +16,15 @@ export class ViewExerciseComponent implements OnInit {
 
   dataSource: MatTableDataSource<IExercises>;
   displayedColumns = ['exerciseId','exerciseName','muscleGroupId'];
-  //@ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
-  //@ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private workoutService: WorkoutService) { }
 
   ngOnInit() {
     this.refreshExercises();
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   refreshExercises() {
@@ -31,8 +33,12 @@ export class ViewExerciseComponent implements OnInit {
     )
       .subscribe((exercises: IExercises[]) => {
         this.dataSource = new MatTableDataSource<IExercises>(exercises)
-        //this.dataSource.paginator = this.paginator
+        this.dataSource.paginator = this.paginator
       },
         (error: Error) => this.errorMessage = error.message);
+    }
+
+    applyFilter(filterValue: string) {
+      this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 }
