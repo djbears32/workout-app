@@ -1,6 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+
+@import "../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css";
+
+
+body{
+  background-color: #474c52;
+}
+
 a {
   color: #0366d6;
 }
@@ -12,5 +20,10 @@ code {
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
-  border-color: #1861ac;
+  border-color: #1b6ec2;
+}
+
+.title{
+  padding: 10px 10px;
+  color: #0672f7
 }

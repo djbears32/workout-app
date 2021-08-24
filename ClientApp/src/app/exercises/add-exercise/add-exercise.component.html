@@ -1,21 +1,22 @@
+<h3 class="title text-center">Add Exercise</h3>
 <form class="contentContainer" [formGroup]="editFieldsForm" (ngSubmit)="submitEdit()">
-    <div fxLayout="column">
-        <div fxLayout="row"
+    <div>
+        <div fxLayoutAlign="center"
             fxLayoutGap="20px"
-            fxlaypitAlign="space-between"
+            fxlayoutAlign="space-between"
             fxjLayout.sm="column"
             fxLayout.xs="column">
-            <div fxFlex="1 1 auto">
+            <div>
                 <mat-form-field class="fullWidthField">
                     <mat-label>Exercise Name</mat-label>
                     <input type="text" matInput formControlName="exerciseName" required/> 
                 </mat-form-field>
             </div>
 
-            <div fxFlex="1 1 auto">
+            <div>
                 <mat-form-field class="fullWidthField" appearance="fill">
                     <mat-label>Muscle Group</mat-label>
-                    <mat-select formControlName="muscleGroupId">
+                    <mat-select formControlName="muscleGroupId" required>
                         <mat-option>--None--</mat-option>
                         <mat-option *ngFor="let x of muscleGroups" [value]="x.muscleGroupId">
                             {{ x.muscleGroupName }}
@@ -26,12 +27,13 @@
 
         </div>
     </div>
-    <div class="text-center">
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px">
         <div>
-            <button type="submit" mat-raised-button [disabled]="editFieldsForm.invalid">Submit</button>
+            <button class="btn btn-primary" type="submit" mat-raised-button [disabled]="editFieldsForm.invalid">Submit</button>
         </div>
+        <span></span>
         <div>
-            <button type="button" mat-raised-button (click)="cancelEdit()">Cancel</button>
+            <button class="btn btn-primary" type="button" mat-raised-button (click)="cancelEdit()">Cancel</button>
         </div>
     </div>
 </form>

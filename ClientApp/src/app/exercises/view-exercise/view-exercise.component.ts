@@ -17,7 +17,7 @@ export class ViewExerciseComponent implements OnInit {
   editExercise = false;
 
   dataSource: MatTableDataSource<IExercises>;
-  displayedColumns = ['exerciseId','exerciseName','muscleGroupId'];
+  displayedColumns = ['exerciseName','muscleGroupId'];
 
   @Output() editModeChanged = new EventEmitter();
 

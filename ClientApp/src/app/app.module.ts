@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatTableModule, MatSelectModule, MatInputModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { ViewExerciseComponent } from './exercises/view-exercise/view-exercise.c
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddExerciseComponent } from './exercises/add-exercise/add-exercise.component';
 import { DeleteExerciseComponent } from './exercises/delete-exercise/delete-exercise.component';
+import { ViewWorkoutComponent } from './workout/view-workout/view-workout.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { DeleteExerciseComponent } from './exercises/delete-exercise/delete-exer
     AddWorkoutComponent,
     ViewExerciseComponent,
     AddExerciseComponent,
-    DeleteExerciseComponent
+    DeleteExerciseComponent,
+    ViewWorkoutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -38,6 +41,7 @@ import { DeleteExerciseComponent } from './exercises/delete-exercise/delete-exer
     MatInputModule,
     MatSelectModule,
     MatMenuModule,
+    FlexLayoutModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

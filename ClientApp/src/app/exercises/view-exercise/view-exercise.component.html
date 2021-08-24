@@ -1,4 +1,4 @@
-<h3 mat-h3>Exercise</h3>
+<h3 class="title text-center">Exercise</h3>
 <div *ngIf="isLoadingData" fxLayout="row" fxLayoutAlign="center">
     <div>
         <mat-spinner></mat-spinner>
@@ -7,11 +7,6 @@
 
 <div class="mat-elevation-z8"> 
     <table mat-table [dataSource]="dataSource" matSort>
-
-        <ng-container matColumnDef="exerciseId">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Exercise Number</th>
-            <td mat-cell *matCellDef="let entry">{{ entry.exerciseId }}</td>
-        </ng-container>
 
         <ng-container matColumnDef="exerciseName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Exercise Name</th>
@@ -33,11 +28,11 @@
     <mat-divider></mat-divider>
 
     <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
     </mat-form-field>
 
     <div>
-        <button class="editButton" mat-raised-button (click)="toggleEdit()">Add</button>
+        <button class="btn btn-primary" mat-raised-button (click)="toggleEdit()">Add</button>
     </div>
 
 <div *ngIf="editExercise === true">
