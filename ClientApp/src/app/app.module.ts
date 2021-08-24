@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MatSelectModule, MatInputModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -35,6 +35,8 @@ import { DeleteExerciseComponent } from './exercises/delete-exercise/delete-exer
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
+    MatInputModule,
+    MatSelectModule,
     MatMenuModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },

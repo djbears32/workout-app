@@ -1,6 +1,5 @@
-import { variable } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 
 import { IExercises } from 'src/app/models/IExcercises';
@@ -22,36 +21,36 @@ export class AddExerciseComponent implements OnInit {
   errorMessage = '';
   isLoadingData = false;
 
+  muscleGroupValue: string;
+
   muscleGroups = {} as IMuscleGroups[];
 
   editFieldsForm: FormGroup;
 
-  constructor(private workoutService: WorkoutService) {   }
+  constructor(private workoutService: WorkoutService,
+    private formBuilder: FormBuilder) {  
+
+     }
 
   ngOnInit() {
     this.loadDropdown();
 
-    this.editFieldsForm = new FormGroup({
-      exerciseName: new FormControl(this.exerciseData.exerciseName, Validators.compose([Validators.required, Validators.maxLength(40)]))
+    this.editFieldsForm = this.formBuilder.group({
+      exerciseId: -1,
+      exerciseName: new FormControl(this.exerciseData.exerciseName, Validators.compose([Validators.required, Validators.maxLength(40)])),
+      muscleGroupId: [this.exerciseData.muscleGroupId]
     });
    }
 
   submitEdit() {
     this.saving = true;
-    try {
-      this.updatedexerciseData = this.updatedexerciseData;
-      this.updatedexerciseData.exerciseId = -1;
-      this.updatedexerciseData.exerciseName = this.editFieldsForm.get('exerciseName').value;
-      this.updatedexerciseData.muscleGroupId = this.getMuscleGroupId(this.editFieldsForm.get('muscleGroupName').value);
-    }
-    catch (error) {
-      console.error(error);
-      this.errorMessage = 'An error prevented the record from being submitted.';
-      this.saving = false;
-      return;
-    } 
+      let submittedForm: IExercises = {
+        exerciseId: -1,
+        exerciseName: this.editFieldsForm.get('exerciseName').value,
+        muscleGroupId: this.editFieldsForm.get('muscleGroupId').value
+      }
 
-    this.workoutService.updateExercises(this.updatedexerciseData)
+    this.workoutService.updateExercises(submittedForm)
     .pipe(
       finalize(() => { this.saving = false })
     )

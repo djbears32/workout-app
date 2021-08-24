@@ -76,7 +76,6 @@ namespace workout_app.API
         {
             var exerciseEntity = new Exercise
             {
-                ExerciseId = 0,
                 ExerciseName = exerciseInfoForm.ExerciseName,
                 MuscleGroupId = exerciseInfoForm.MuscleGroupId
             };
