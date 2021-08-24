@@ -1,3 +1,4 @@
+import { variable } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
@@ -14,55 +15,43 @@ import { WorkoutService } from 'src/app/services/workout.services';
 export class AddExerciseComponent implements OnInit {
 
   @Input() exerciseData: IExercises;
-  @Input() muscleGroupData: IMuscleGroups;
   @Output() editClosed = new EventEmitter();
   @Output() recordUpdated = new EventEmitter<boolean>();
   saving = false;
   updatedexerciseData: IExercises;
-  updatedmuscleGroupData: IMuscleGroups;
   errorMessage = '';
+  isLoadingData = false;
 
-  editFieldsForm = new FormGroup({
-    exerciseName: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(40)])),
-    muscleGroup: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(40)]))
-  });
+  muscleGroups = {} as IMuscleGroups[];
 
-  constructor(private workoutService: WorkoutService) { }
+  editFieldsForm: FormGroup;
+
+  constructor(private workoutService: WorkoutService) {   }
 
   ngOnInit() {
+    this.loadDropdown();
 
-    var defaultObj: IExercises = {
-      exerciseId: 0,
-      exerciseName: null,
-      muscleGroupId: 0
-    }
-    var muscleGroupName: IMuscleGroups = {
-      muscleGroupId: 0,
-      muscleGroupName: null
-    }
-
-    this.editFieldsForm.get('exerciseId').setValue(this.exerciseData.exerciseId);
-    this.editFieldsForm.get('exerciseName').setValue(this.exerciseData.exerciseName);
-    this.editFieldsForm.get('muscleGroupId').setValue(this.exerciseData.muscleGroupId);
-    this.editFieldsForm.get('muscleGroupName').setValue(this.muscleGroupData.muscleGroupName);
-  }
+    this.editFieldsForm = new FormGroup({
+      exerciseName: new FormControl(this.exerciseData.exerciseName, Validators.compose([Validators.required, Validators.maxLength(40)]))
+    });
+   }
 
   submitEdit() {
     this.saving = true;
     try {
       this.updatedexerciseData = this.updatedexerciseData;
+      this.updatedexerciseData.exerciseId = -1;
       this.updatedexerciseData.exerciseName = this.editFieldsForm.get('exerciseName').value;
-      this.updatedmuscleGroupData = this.updatedmuscleGroupData;
-      this.updatedmuscleGroupData.muscleGroupName = this.editFieldsForm.get('muscleGroupName').value;
+      this.updatedexerciseData.muscleGroupId = this.getMuscleGroupId(this.editFieldsForm.get('muscleGroupName').value);
     }
     catch (error) {
       console.error(error);
       this.errorMessage = 'An error prevented the record from being submitted.';
       this.saving = false;
       return;
-    }
+    } 
 
-    this.workoutService.updateExercises(this.updatedexerciseData, this.updatedmuscleGroupData)
+    this.workoutService.updateExercises(this.updatedexerciseData)
     .pipe(
       finalize(() => { this.saving = false })
     )
@@ -81,4 +70,19 @@ export class AddExerciseComponent implements OnInit {
     this.editClosed.emit();
   }
 
+  loadDropdown() {
+    this.workoutService.getMuscleGroups().pipe(
+      finalize(() => this.isLoadingData = false)
+    )
+      .subscribe((muscleGroupsData: IMuscleGroups[]) => {
+        this.muscleGroups = muscleGroupsData;
+        console.log(this.muscleGroups);
+      },
+        (error: Error) => this.errorMessage = error.message);
+    }
+
+    getMuscleGroupId(name: string) {
+      var temp = this.muscleGroups.find( x => x.muscleGroupName === name).muscleGroupId
+      return temp
+    }
 }

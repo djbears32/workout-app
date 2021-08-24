@@ -41,6 +41,6 @@
     </div>
 
 <div *ngIf="editExercise === true">
-    <app-add-exercise (editClosed)="toggleEdit()"></app-add-exercise>
+    <app-add-exercise (editClosed)="toggleEdit()" [exerciseData]="editExerciseObj"></app-add-exercise>
 </div>
 

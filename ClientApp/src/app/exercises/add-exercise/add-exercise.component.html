@@ -7,22 +7,25 @@
             fxlaypitAlign="space-between"
             fxjLayout.sm="column"
             fxLayout.xs="column">
-        <div fxFlex="1 1 auto">
-            <mat-form-field class="fullWidthField">
-                <mat-label>Exercise Name</mat-label>
-                <input type="text" matInput formControlName="exerciseName" required/> 
-            </mat-form-field>
-        </div>
+            <div fxFlex="1 1 auto">
+                <mat-form-field class="fullWidthField">
+                    <mat-label>Exercise Name</mat-label>
+                    <input type="text" matInput formControlName="exerciseName" required/> 
+                </mat-form-field>
+            </div>
 
-        <div fxFlex="1 1 auto">
-            <mat-form-field class="fullWidthField">
-                <mat-label>Muscle Group Name</mat-label>
-                <input type="text" matInput formControlName="muscleGroupName" required/> 
-            </mat-form-field>
-        </div>
+            <div fxFlex="1 1 auto">
+                <mat-form-field appearance="fill">
+                    <mat-label>Muscle Group</mat-label>
+                    <mat-select>
+                    <mat-option *ngFor="let muscleGroup of muscleGroups" [Value]="muscleGroups.muscleGroupName">
+                        {{muscleGroups.muscleGroupName}}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
 
         </div>
-
     </div>
     <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px">
         <div>

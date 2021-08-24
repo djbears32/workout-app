@@ -19,10 +19,16 @@ export class WorkoutService {
         return this.httpClient.get<IExercises[]>(apiUrl);
     }
 
-    updateExercises(exerciseData, muscleGroupData)
+    getMuscleGroups()
+    {
+        var apiUrl = 'api/workout/getmusclegroups';
+        return this.httpClient.get<IMuscleGroups[]>(apiUrl);
+    }
+
+    updateExercises(exerciseData)
     {
         var apiUrl = 'api/workout/addexercises';
-        return this.httpClient.get<IExercises[]>(apiUrl);
+        return this.httpClient.post(apiUrl, exerciseData);
     }
 
 

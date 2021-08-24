@@ -4,6 +4,7 @@ import { WorkoutService } from '../../services/workout.services'
 import { finalize } from 'rxjs/operators';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatSort, MatTableDataSource } from '@angular/material';
+import { IMuscleGroups } from 'src/app/models/IMuscleGroups';
 
 @Component({
   selector: 'app-view-exercise',
@@ -22,6 +23,17 @@ export class ViewExerciseComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  editExerciseObj: IExercises = {
+    exerciseId: 0,
+    exerciseName: null,
+    muscleGroupId: 0
+  };
+
+  editMuscleGroupObj: IMuscleGroups = {
+    muscleGroupId: 0,
+    muscleGroupName: null
+  };
 
   constructor(private workoutService: WorkoutService) { }
 

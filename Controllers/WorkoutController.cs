@@ -33,5 +33,32 @@ namespace workout_app.Controllers
                 return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Call to get exercises failed");
             }
         }
+
+        [HttpGet("getmusclegroups")]
+        public ActionResult getMuscleGroups()
+        {
+            try
+            {
+               return Ok(this.exerciseAPI.getMuscleGroups());
+            }
+            catch
+            {
+                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Call to get muscle groups failed");
+            }
+        }
+
+        [HttpPost("addexercises")]
+        public ActionResult AddExercises(ExerciseViewModel vm)
+        {
+            try
+            {
+                this.exerciseAPI.addExercises(vm);
+               return Ok();
+            }
+            catch
+            {
+                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Adding exercise failed");
+            }
+        }
     }
 }
