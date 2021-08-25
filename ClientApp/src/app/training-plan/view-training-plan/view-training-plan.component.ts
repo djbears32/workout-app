@@ -17,7 +17,7 @@ export class ViewTrainingPlanComponent implements OnInit {
   editExercise = false;
 
   dataSource: MatTableDataSource<ITrainingPlan>;
-  displayedColumns = ['trainingPlanId','trainingPlanName', 'stDate', 'workoutLength', 'endDate', 'workoutsPerWeek', 'workoutTypeId'];
+  displayedColumns = ['trainingPlanName', 'startDate', 'workoutLength', 'endDate', 'workoutsPerWeek', 'workoutTypeId'];
 
   @Output() editModeChanged = new EventEmitter();
 

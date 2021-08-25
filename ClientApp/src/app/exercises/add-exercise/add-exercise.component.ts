@@ -49,6 +49,7 @@ export class AddExerciseComponent implements OnInit {
         exerciseName: this.editFieldsForm.get('exerciseName').value,
         muscleGroupId: this.editFieldsForm.get('muscleGroupId').value
       }
+      
 
     this.workoutService.updateExercises(submittedForm)
     .pipe(

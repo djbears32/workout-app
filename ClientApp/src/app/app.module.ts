@@ -3,6 +3,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatTableModule, MatSelectModule, MatInputModule, MatMenuModule } from '@angular/material';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -39,6 +40,7 @@ import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
+    MatPaginatorModule,
     MatInputModule,
     MatSelectModule,
     MatMenuModule,
@@ -50,7 +52,7 @@ import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-
       { path: 'add-workout', component: AddWorkoutComponent },
       { path: 'view-exercise', component: ViewExerciseComponent },
       { path: 'view-training-plan', component: ViewTrainingPlanComponent },
-      { path: 'add-training-plan', component: AddTrainingPlanComponent },
+      { path: 'add-training-plan', component: AddTrainingPlanComponent }
     ]),
     BrowserAnimationsModule
   ],

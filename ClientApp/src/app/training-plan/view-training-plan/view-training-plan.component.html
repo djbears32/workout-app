@@ -1,4 +1,4 @@
-<h3 class="title text-center">Exercise</h3>
+<h3 class="title text-center">Training Plan</h3>
 <div *ngIf="isLoadingData" fxLayout="row" fxLayoutAlign="center">
     <div>
         <mat-spinner></mat-spinner>
@@ -6,21 +6,16 @@
 </div>
 
 <div class="mat-elevation-z8"> 
-    <table mat-table [dataSource]="dataSource" matSort>
-
-        <ng-container matColumnDef="trainingPlanId">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Training Plan Id</th>
-            <td mat-cell *matCellDef="let entry">{{ entry.trainingPlanId }}</td>
-        </ng-container>
+    <table class="w-100" mat-table [dataSource]="dataSource" matSort>
 
         <ng-container matColumnDef="trainingPlanName">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Training Plan Name</th>
             <td mat-cell *matCellDef="let entry">{{ entry.trainingPlanName }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="stDate">
+        <ng-container matColumnDef="startDate">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
-            <td mat-cell *matCellDef="let entry">{{ entry.stDate }}</td>
+            <td mat-cell *matCellDef="let entry">{{ entry.startDate | date: 'M/d/yyyy' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="workoutLength">
@@ -30,7 +25,7 @@
 
         <ng-container matColumnDef="endDate">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
-            <td mat-cell *matCellDef="let entry">{{ entry.endDate }}</td>
+            <td mat-cell *matCellDef="let entry">{{ entry.endDate | date: 'M/d/yyyy'  }}</td>
         </ng-container>
 
         <ng-container matColumnDef="workoutsPerWeek">
@@ -42,7 +37,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Workout Type Id</th>
             <td mat-cell *matCellDef="let entry">{{ entry.workoutTypeId }}</td>
         </ng-container>
-        
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
@@ -56,6 +51,8 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
     </mat-form-field>
 
+    <!--
+        
     <div>
         <button class="btn btn-primary" mat-raised-button (click)="toggleEdit()">Add</button>
     </div>
@@ -63,3 +60,5 @@
 <div *ngIf="editExercise === true">
     <app-add-exercise (editClosed)="toggleEdit()" [exerciseData]="editExerciseObj"></app-add-exercise>
 </div>
+
+-->

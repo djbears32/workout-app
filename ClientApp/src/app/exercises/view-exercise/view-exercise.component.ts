@@ -20,9 +20,10 @@ export class ViewExerciseComponent implements OnInit {
   displayedColumns = ['exerciseName','muscleGroupId'];
 
   @Output() editModeChanged = new EventEmitter();
+  @Output() recordUpdated = new EventEmitter<boolean>();
 
-  @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
 
   editExerciseObj: IExercises = {
     exerciseId: 0,
@@ -61,4 +62,9 @@ export class ViewExerciseComponent implements OnInit {
     toggleEdit() {
       this.editExercise = !this.editExercise;
     }
+
+    onRecordUpdated(updateSucessful: boolean)
+    {
+      this.recordUpdated.emit(updateSucessful);
+    };
 }
