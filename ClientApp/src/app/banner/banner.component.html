@@ -1,20 +1,9 @@
 <header>
     <nav
-      class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+      class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark box-shadow mb-3"
     >
       <div class="container">
         <a class="navbar-brand" [routerLink]="['/']">Workout App</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target=".navbar-collapse"
-          aria-label="Toggle navigation"
-          [attr.aria-expanded]="isExpanded"
-          (click)="toggle()"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
         <div
           class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
           [ngClass]="{ show: isExpanded }"
@@ -23,29 +12,39 @@
             <li
               class="nav-item"
               [routerLinkActive]="['link-active']"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+              [routerLinkActiveOptions]="{ exact: true }">
+              <button class="btn btn-primary" [routerLink]="['/']">Home</button>
             </li>
+
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/view-exercise']"
-                >View Exercise</a
-              >
+              <button class="btn btn-primary" mat-button [matMenuTriggerFor]="exerciseMenu">Exercise</button>
+              <mat-menu #exerciseMenu="matMenu">
+                <button class="btn btn-primary" [routerLink]="['/view-exercise']">View Exercise</button>
+              </mat-menu>
             </li>
+
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/add-workout']"
-                >Add Workout</a
-              >
+              <button class="btn btn-primary"mat-button [matMenuTriggerFor]="workoutMenu">Workout</button>
+              <mat-menu #workoutMenu="matMenu">
+                <button class="btn btn-primary" mat-menu-item [routerLink]="['/add-workout']">Add Workout</button>
+              </mat-menu>
             </li>
+
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/counter']"
-                >Counter</a
-              >
+              <button class="btn btn-primary"mat-button [matMenuTriggerFor]="trainingPlanMenu">TrainingPlan</button>
+              <mat-menu #trainingPlanMenu="matMenu">
+                <button class="btn btn-primary" mat-menu-item [routerLink]="['/add-workout']">Add Workout</button>
+              </mat-menu>
             </li>
+
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-                >Fetch data</a
-              >
+              <button class="btn btn-primary" [routerLink]="['/counter']"
+                >Counter</button>
+            </li>
+
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <button class="btn btn-primary" [routerLink]="['/fetch-data']"
+                >Fetch data</button>
             </li>
           </ul>
         </div>

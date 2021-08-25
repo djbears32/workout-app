@@ -2,8 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { MatTableModule, MatSelectModule, MatInputModule } from '@angular/material';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule, MatSelectModule, MatInputModule, MatMenuModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -16,8 +15,9 @@ import { AddWorkoutComponent } from './workout/add-workout/add-workout.component
 import { ViewExerciseComponent } from './exercises/view-exercise/view-exercise.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddExerciseComponent } from './exercises/add-exercise/add-exercise.component';
-import { DeleteExerciseComponent } from './exercises/delete-exercise/delete-exercise.component';
 import { ViewWorkoutComponent } from './workout/view-workout/view-workout.component';
+import { ViewTrainingPlanComponent } from './training-plan/view-training-plan/view-training-plan.component';
+import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-training-plan.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +29,9 @@ import { ViewWorkoutComponent } from './workout/view-workout/view-workout.compon
     AddWorkoutComponent,
     ViewExerciseComponent,
     AddExerciseComponent,
-    DeleteExerciseComponent,
-    ViewWorkoutComponent
+    ViewWorkoutComponent,
+    ViewTrainingPlanComponent,
+    AddTrainingPlanComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
