@@ -47,6 +47,19 @@ namespace workout_app.Controllers
             }
         }
 
+        [HttpGet("gettrainingplans")]
+        public ActionResult getTrainingPlans()
+        {
+            try
+            {
+               return Ok(this.exerciseAPI.getTrainingPlans());
+            }
+            catch
+            {
+                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Call to get training plans failed");
+            }
+        }
+
         [HttpPost("addexercises")]
         public ActionResult AddExercises(ExerciseViewModel vm)
         {

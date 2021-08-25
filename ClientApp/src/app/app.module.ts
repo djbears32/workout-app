@@ -49,6 +49,8 @@ import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'add-workout', component: AddWorkoutComponent },
       { path: 'view-exercise', component: ViewExerciseComponent },
+      { path: 'view-training-plan', component: ViewTrainingPlanComponent },
+      { path: 'add-training-plan', component: AddTrainingPlanComponent },
     ]),
     BrowserAnimationsModule
   ],

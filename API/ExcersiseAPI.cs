@@ -10,15 +10,18 @@ namespace workout_app.API
         DAL.UnitOfWork.IUnitOfWork unitOfWork;
         DAL.Repositories.IExerciseRepository exerciseRepo;
         DAL.Repositories.IMuscleGroupRepository muscleGroupRepo;
+        DAL.Repositories.ITrainingPlanRepository trainingPlanRepo;
 
         public ExerciseAPI(
             DAL.UnitOfWork.IUnitOfWork unitOfWork,
             DAL.Repositories.IExerciseRepository exerciseRepo,
-            DAL.Repositories.IMuscleGroupRepository muscleGroupRepo)
+            DAL.Repositories.IMuscleGroupRepository muscleGroupRepo,
+            DAL.Repositories.ITrainingPlanRepository trainingPlanRepo)
             {
                 this.unitOfWork = unitOfWork;
                 this.exerciseRepo = exerciseRepo;
                 this.muscleGroupRepo = muscleGroupRepo;
+                this.trainingPlanRepo = trainingPlanRepo;
             }
         public List<ViewModels.ExerciseViewModel> GetExercises()
         {
@@ -70,6 +73,41 @@ namespace workout_app.API
                 .ToList();
 
             return muscleGroupInfoList;
+        }
+
+        public List<ViewModels.TrainingPlanViewModel> getTrainingPlans()
+        {
+            var trainingPlanInfoList = new List<ViewModels.TrainingPlanViewModel>();
+
+            var trainingPlanInfo = this.trainingPlanRepo.GetQueryable()
+                .Where(x => x.TrainingPlanId != 0);
+
+            trainingPlanInfoList = trainingPlanInfo
+                .Select(entry => new
+                {
+                    entry.TrainingPlanId,
+                    entry.TrainingPlanName,
+                    entry.StartDate,
+                    entry.WorkoutLength,
+                    entry.EndDate,
+                    entry.WorkoutsPerWeek,
+                    entry.WorkoutTypeId
+                })
+                .OrderBy(entry => entry.TrainingPlanId)
+                .ToList()
+                .Select(entry => new TrainingPlanViewModel
+                {
+                    TrainingPlanId = entry.TrainingPlanId,
+                    TrainingPlanName = entry.TrainingPlanName,
+                    StartDate = entry.StartDate,
+                    WorkoutLength = entry.WorkoutLength,
+                    EndDate = entry.EndDate,
+                    WorkoutsPerWeek = entry.WorkoutsPerWeek,
+                    WorkoutTypeId = entry.WorkoutTypeId
+                })
+                .ToList();
+
+            return trainingPlanInfoList;
         }
 
         public void addExercises(ExerciseViewModel exerciseInfoForm)
