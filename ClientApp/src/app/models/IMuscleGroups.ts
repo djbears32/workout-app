@@ -1,4 +1,4 @@
 export interface IMuscleGroups {
-    muscleGroupId: number;
-    muscleGroupName: string;
+    muscleGroupId: number,
+    muscleGroupName: string
 }

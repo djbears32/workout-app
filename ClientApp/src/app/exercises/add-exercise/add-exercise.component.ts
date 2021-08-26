@@ -21,8 +21,6 @@ export class AddExerciseComponent implements OnInit {
   errorMessage = '';
   isLoadingData = false;
 
-  muscleGroupValue: string;
-
   muscleGroups = {} as IMuscleGroups[];
 
   editFieldsForm: FormGroup;

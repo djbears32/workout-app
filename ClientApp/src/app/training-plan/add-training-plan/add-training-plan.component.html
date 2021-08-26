@@ -1,1 +1,66 @@
-<p>add-training-plan works!</p>
+<h3 class="title text-center">Add Training Plan</h3>
+<form class="contentContainer" [formGroup]="editFieldsForm" (ngSubmit)="submitEdit()">
+    <div>
+        <div fxLayoutAlign="center"
+            fxLayoutGap="20px"
+            fxlayoutAlign="space-between"
+            fxjLayout.sm="column"
+            fxLayout.xs="column">
+            <div>
+                <mat-form-field class="fullWidthField" color="accent">
+                    <mat-label>Training Plan Name</mat-label>
+                    <input type="text" matInput formControlName="trainingPlanName" required/> 
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="fill" color="accent">
+                    <mat-label>Start Date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="startDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker startView="month" color="accent"></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="fullWidthField" color="accent">
+                    <mat-label>Workout Length</mat-label>
+                    <input type="number" matInput formControlName="workoutLength" required/> 
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="fill" color="accent">
+                    <mat-label>End Date</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="endDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1 startView="month" color="accent"></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="fullWidthField" color="accent">
+                    <mat-label>Workouts Per Week</mat-label>
+                    <input type="number" matInput formControlName="workoutsPerWeek" required/> 
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field class="fullWidthField" color="accent">
+                    <mat-label>Workout Type Id</mat-label>
+                    <input type="number" matInput formControlName="workoutTypeId" required/> 
+                </mat-form-field>
+            </div>
+
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px">
+        <div>
+            <button class="btn btn-primary" type="submit" mat-raised-button [disabled]="editFieldsForm.invalid">Submit</button>
+        </div>
+        <span></span>
+        <div>
+            <button class="btn btn-primary" type="button" mat-raised-button (click)="cancelEdit()">Cancel</button>
+        </div>
+    </div>
+</form>

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { MatTableModule, MatSelectModule, MatInputModule, MatMenuModule } from '@angular/material';
+import { MatTableModule, MatSelectModule, MatInputModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -39,6 +39,8 @@ import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule, 
     MatTableModule,
     MatPaginatorModule,
     MatInputModule,
@@ -57,7 +59,7 @@ import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-
     BrowserAnimationsModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

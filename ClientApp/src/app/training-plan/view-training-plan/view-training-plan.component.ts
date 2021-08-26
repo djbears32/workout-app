@@ -11,18 +11,28 @@ import { MatSort, MatTableDataSource } from '@angular/material';
   styleUrls: ['./view-training-plan.component.css']
 })
 export class ViewTrainingPlanComponent implements OnInit {
-
   errorMessage: string;
   isLoadingData = true;
-  editExercise = false;
+  editTrainingPlan = false;
 
   dataSource: MatTableDataSource<ITrainingPlan>;
   displayedColumns = ['trainingPlanName', 'startDate', 'workoutLength', 'endDate', 'workoutsPerWeek', 'workoutTypeId'];
 
   @Output() editModeChanged = new EventEmitter();
+  @Output() recordUpdated = new EventEmitter<boolean>();
 
-  @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
+  
+  editTrainingPlanObj: ITrainingPlan = {
+    trainingPlanId: 0,
+    trainingPlanName: null,
+    startDate: null,
+    workoutLength: 0,
+    endDate: null,
+    workoutsPerWeek: 0,
+    workoutTypeId: 0
+  };
 
   constructor(private workoutService: WorkoutService) { }
 
@@ -47,7 +57,12 @@ export class ViewTrainingPlanComponent implements OnInit {
   }
 
   toggleEdit() {
-    this.editExercise = !this.editExercise;
+    this.editTrainingPlan = !this.editTrainingPlan;
   }
+
+  onRecordUpdated(updateSucessful: boolean)
+    {
+      this.recordUpdated.emit(updateSucessful);
+    };
 
 }

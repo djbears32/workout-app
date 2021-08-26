@@ -1,3 +1,4 @@
+<div [hidden]="editTrainingPlan == true"> 
 <h3 class="title text-center">Training Plan</h3>
 <div *ngIf="isLoadingData" fxLayout="row" fxLayoutAlign="center">
     <div>
@@ -42,23 +43,21 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <mat-paginator color="accent" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>   
 
     <mat-divider></mat-divider>
 
-    <mat-form-field>
+    <mat-form-field color="accent">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
     </mat-form-field>
-
-    <!--
         
     <div>
         <button class="btn btn-primary" mat-raised-button (click)="toggleEdit()">Add</button>
     </div>
 
-<div *ngIf="editExercise === true">
-    <app-add-exercise (editClosed)="toggleEdit()" [exerciseData]="editExerciseObj"></app-add-exercise>
 </div>
 
--->
+<div *ngIf="editTrainingPlan === true">
+    <app-add-training-plan (editClosed)="toggleEdit()" [trainingPlanData]="editTrainingPlanObj" (recordUpdated)="onRecordUpdated($event)"></app-add-training-plan>
+</div>

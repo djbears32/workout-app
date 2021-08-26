@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using workout_app.DAL.Models;
 
 namespace workout_app.Migrations
 {
     [DbContext(typeof(WorkoutContext))]
-    partial class WorkoutContextModelSnapshot : ModelSnapshot
+    [Migration("20210825140821_hopethisisfixed")]
+    partial class hopethisisfixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

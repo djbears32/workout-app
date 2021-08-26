@@ -121,5 +121,21 @@ namespace workout_app.API
             this.exerciseRepo.Add(exerciseEntity);
             this.unitOfWork.Commit();
         }
+
+        public void AddTrainingPlans(TrainingPlanViewModel trainingPlanInfoForm)
+        {
+            var trainingPlanEntity = new TrainingPlan
+            {
+                TrainingPlanName = trainingPlanInfoForm.TrainingPlanName,
+                StartDate = trainingPlanInfoForm.StartDate,
+                WorkoutLength = trainingPlanInfoForm.WorkoutLength,
+                EndDate = trainingPlanInfoForm.EndDate,
+                WorkoutsPerWeek = trainingPlanInfoForm.WorkoutsPerWeek,
+                WorkoutTypeId = trainingPlanInfoForm.WorkoutTypeId
+            };
+            
+            this.trainingPlanRepo.Add(trainingPlanEntity);
+            this.unitOfWork.Commit();
+        }
     }
 }
