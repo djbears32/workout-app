@@ -16,7 +16,7 @@ export class ViewTrainingPlanComponent implements OnInit {
   editTrainingPlan = false;
 
   dataSource: MatTableDataSource<ITrainingPlan>;
-  displayedColumns = ['trainingPlanName', 'startDate', 'workoutLength', 'endDate', 'workoutsPerWeek', 'workoutTypeId'];
+  displayedColumns = ['trainingPlanName', 'startDate', 'workoutLength', 'endDate', 'workoutsPerWeek', 'workoutTypeId', 'action'];
 
   @Output() editModeChanged = new EventEmitter();
   @Output() recordUpdated = new EventEmitter<boolean>();
@@ -58,6 +58,10 @@ export class ViewTrainingPlanComponent implements OnInit {
 
   toggleEdit() {
     this.editTrainingPlan = !this.editTrainingPlan;
+  }
+
+  editTraining() {
+
   }
 
   onRecordUpdated(updateSucessful: boolean)

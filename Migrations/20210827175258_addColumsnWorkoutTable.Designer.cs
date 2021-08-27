@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using workout_app.DAL.Models;
 
 namespace workout_app.Migrations
 {
     [DbContext(typeof(WorkoutContext))]
-    partial class WorkoutContextModelSnapshot : ModelSnapshot
+    [Migration("20210827175258_addColumsnWorkoutTable")]
+    partial class addColumsnWorkoutTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,6 +104,9 @@ namespace workout_app.Migrations
                     b.Property<string>("ExerciseId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("ExercisesExerciseId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
@@ -114,7 +119,9 @@ namespace workout_app.Migrations
                     b.Property<int>("Weight")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("WeekId");
+
+                    b.HasIndex("ExercisesExerciseId");
 
                     b.HasIndex("TrainingPlanId");
 
@@ -162,7 +169,7 @@ namespace workout_app.Migrations
                 {
                     b.HasOne("workout_app.DAL.Models.Exercise", "Exercises")
                         .WithMany("Workouts")
-                        .HasForeignKey("ExerciseId");
+                        .HasForeignKey("ExercisesExerciseId");
 
                     b.HasOne("workout_app.DAL.Models.TrainingPlan", "TrainingPlan")
                         .WithMany("Workout")

@@ -18,6 +18,7 @@ import { AddExerciseComponent } from './exercises/add-exercise/add-exercise.comp
 import { ViewWorkoutComponent } from './workout/view-workout/view-workout.component';
 import { ViewTrainingPlanComponent } from './training-plan/view-training-plan/view-training-plan.component';
 import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-training-plan.component';
+import { WorkoutLookupDialogComponent } from './workout/workout-lookup-dialog/workout-lookup-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-
     AddExerciseComponent,
     ViewWorkoutComponent,
     ViewTrainingPlanComponent,
-    AddTrainingPlanComponent
+    AddTrainingPlanComponent,
+    WorkoutLookupDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
