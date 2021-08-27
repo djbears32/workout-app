@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BannerComponent } from './banner/banner.component';
 import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
@@ -24,7 +23,6 @@ import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-
   declarations: [
     AppComponent,
     HomeComponent,
-    CounterComponent,
     FetchDataComponent,
     BannerComponent,
     AddWorkoutComponent,
@@ -49,7 +47,6 @@ import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-
     FlexLayoutModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'add-workout', component: AddWorkoutComponent },
       { path: 'view-exercise', component: ViewExerciseComponent },
