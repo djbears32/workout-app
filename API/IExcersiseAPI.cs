@@ -8,6 +8,7 @@ namespace workout_app.API
         List<ViewModels.ExerciseViewModel> GetExercises();
         List<ViewModels.MuscleGroupViewModel> getMuscleGroups();
         List<ViewModels.TrainingPlanViewModel> getTrainingPlans();
+        List<ViewModels.WorkoutTypeViewModel> getWorkoutTypes();
         void addExercises(ViewModels.ExerciseViewModel exerciseViewModel);
         void AddTrainingPlans(ViewModels.TrainingPlanViewModel trainingPlanViewModel);
     }

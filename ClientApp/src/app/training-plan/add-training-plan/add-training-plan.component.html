@@ -46,9 +46,14 @@
             </div>
 
             <div>
-                <mat-form-field class="fullWidthField" color="accent">
-                    <mat-label>Workout Type Id</mat-label>
-                    <input type="number" matInput formControlName="workoutTypeId" required/> 
+                <mat-form-field class="fullWidthField" appearance="fill" color="accent">
+                    <mat-label>Workout Type Name</mat-label>
+                    <mat-select formControlName="workoutTypeId" required>
+                        <mat-option>--None--</mat-option>
+                        <mat-option *ngFor="let x of workoutTypes" [value]="x.workoutTypeId">
+                            {{ x.workoutTypeName }}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
 

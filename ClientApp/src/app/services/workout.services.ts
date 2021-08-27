@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { IExercises } from "../models/IExcercises";
 import { IMuscleGroups } from "../models/IMuscleGroups";
 import { ITrainingPlan } from "../models/ITrainingPlan";
+import { IWorkoutType } from "../models/IWorkoutType";
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +31,12 @@ export class WorkoutService {
     {
         var apiUrl = 'api/workout/gettrainingplans';
         return this.httpClient.get<ITrainingPlan[]>(apiUrl);
+    }
+
+    getWorkoutTypes()
+    {
+        var apiUrl = 'api/workout/getworkouttypess';
+        return this.httpClient.get<IWorkoutType[]>(apiUrl);
     }
 
     updateExercises(exerciseData)

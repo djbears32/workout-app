@@ -5,6 +5,7 @@ import { finalize } from 'rxjs/operators';
 import { ITrainingPlan } from 'src/app/models/ITrainingPlan';
 import { IMuscleGroups } from 'src/app/models/IMuscleGroups';
 import { WorkoutService } from 'src/app/services/workout.services';
+import { IWorkoutType } from 'src/app/models/IWorkoutType';
 
 @Component({
   selector: 'app-add-training-plan',
@@ -23,12 +24,15 @@ export class AddTrainingPlanComponent implements OnInit {
 
   trainingPlan = {} as ITrainingPlan[];
 
+  workoutTypes = {} as IWorkoutType[];
+
   editFieldsForm: FormGroup;
 
   constructor(private workoutService: WorkoutService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.loadDropdown();
 
     this.editFieldsForm = this.formBuilder.group({
       trainingPlanId: -1,
@@ -71,4 +75,20 @@ export class AddTrainingPlanComponent implements OnInit {
     cancelEdit() {
       this.editClosed.emit();
     }
+
+    loadDropdown() {
+      this.workoutService.getWorkoutTypes().pipe(
+        finalize(() => this.isLoadingData = false)
+      )
+        .subscribe((workoutTypesData: IWorkoutType[]) => {
+          this.workoutTypes = workoutTypesData;
+          console.log(this.workoutTypes);
+        },
+          (error: Error) => this.errorMessage = error.message);
+      }
+  
+      getMuscleTypeId(name: string) {
+        var temp = this.workoutTypes.find( x => x.workoutTypeName === name).workoutTypeId
+        return temp
+      }
 }

@@ -11,17 +11,20 @@ namespace workout_app.API
         DAL.Repositories.IExerciseRepository exerciseRepo;
         DAL.Repositories.IMuscleGroupRepository muscleGroupRepo;
         DAL.Repositories.ITrainingPlanRepository trainingPlanRepo;
+        DAL.Repositories.IWorkoutTypeRepository workoutTypeRepo;
 
         public ExerciseAPI(
             DAL.UnitOfWork.IUnitOfWork unitOfWork,
             DAL.Repositories.IExerciseRepository exerciseRepo,
             DAL.Repositories.IMuscleGroupRepository muscleGroupRepo,
-            DAL.Repositories.ITrainingPlanRepository trainingPlanRepo)
+            DAL.Repositories.ITrainingPlanRepository trainingPlanRepo,
+            DAL.Repositories.IWorkoutTypeRepository workoutTypeRepo)
             {
                 this.unitOfWork = unitOfWork;
                 this.exerciseRepo = exerciseRepo;
                 this.muscleGroupRepo = muscleGroupRepo;
                 this.trainingPlanRepo = trainingPlanRepo;
+                this.workoutTypeRepo = workoutTypeRepo;
             }
         public List<ViewModels.ExerciseViewModel> GetExercises()
         {
@@ -108,6 +111,31 @@ namespace workout_app.API
                 .ToList();
 
             return trainingPlanInfoList;
+        }
+
+        public List<ViewModels.WorkoutTypeViewModel> getWorkoutTypes()
+        {
+            var workoutTypeInfoList = new List<ViewModels.WorkoutTypeViewModel>();
+
+            var workoutTypeInfo = this.workoutTypeRepo.GetQueryable()
+                .Where(x => x.WorkoutTypeId != 0);
+
+            workoutTypeInfoList = workoutTypeInfo
+                .Select(entry => new
+                {
+                    entry.WorkoutTypeId,
+                    entry.WorkoutTypeName
+                })
+                .OrderBy(entry => entry.WorkoutTypeId)
+                .ToList()
+                .Select(entry => new WorkoutTypeViewModel
+                {
+                    WorkoutTypeId = entry.WorkoutTypeId,
+                    WorkoutTypeName = entry.WorkoutTypeName
+                })
+                .ToList();
+
+            return workoutTypeInfoList;
         }
 
         public void addExercises(ExerciseViewModel exerciseInfoForm)
