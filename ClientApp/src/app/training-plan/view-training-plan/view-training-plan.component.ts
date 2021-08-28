@@ -1,9 +1,12 @@
-import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter, Input } from '@angular/core';
 import { ITrainingPlan } from 'src/app/models/ITrainingPlan';
 import { WorkoutService } from '../../services/workout.services'
 import { finalize } from 'rxjs/operators';
 import { MatPaginator} from '@angular/material/paginator';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
+import { ExerciseLookupDialogComponent } from 'src/app/exercises/exercise-lookup-dialog/exercise-lookup-dialog.component';
+import { IWorkoutType } from 'src/app/models/IWorkoutType';
+import { IExercises } from 'src/app/models/IExcercises';
 
 @Component({
   selector: 'app-view-training-plan',
@@ -18,11 +21,15 @@ export class ViewTrainingPlanComponent implements OnInit {
   dataSource: MatTableDataSource<ITrainingPlan>;
   displayedColumns = ['trainingPlanName', 'startDate', 'workoutLength', 'endDate', 'workoutsPerWeek', 'workoutTypeId', 'action'];
 
+  @Input() exerciseInfoData: IExercises;
+
   @Output() editModeChanged = new EventEmitter();
   @Output() recordUpdated = new EventEmitter<boolean>();
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
+
+  selectedExercise: IExercises;
   
   editTrainingPlanObj: ITrainingPlan = {
     trainingPlanId: 0,
@@ -34,10 +41,18 @@ export class ViewTrainingPlanComponent implements OnInit {
     workoutTypeId: 0
   };
 
-  constructor(private workoutService: WorkoutService) { }
+  constructor(private workoutService: WorkoutService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.refreshTrainingPlan();
+
+    this.selectedExercise = {
+      exerciseId: null,
+      exerciseName: null,
+      muscleGroupId: null
+    }
+
   }
 
   refreshTrainingPlan() {
@@ -60,8 +75,17 @@ export class ViewTrainingPlanComponent implements OnInit {
     this.editTrainingPlan = !this.editTrainingPlan;
   }
 
-  editTraining() {
+  openExerciseSearchDialog() {
 
+    const dialogRef = this.dialog.open(ExerciseLookupDialogComponent, { width: '1000px', data:this.selectedExercise });
+
+    dialogRef.afterClosed()
+      .pipe()
+      .subscribe(results => {
+        this.selectedExercise = results.exerciseId;
+        this.selectedExercise = results.exerciseName;
+        this.selectedExercise = results.muscleGroupId;
+      })
   }
 
   onRecordUpdated(updateSucessful: boolean)
