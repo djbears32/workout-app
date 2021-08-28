@@ -80,5 +80,6 @@ export class ViewExerciseComponent implements OnInit {
     onRecordUpdated(updateSucessful: boolean)
     {
       this.recordUpdated.emit(updateSucessful);
+      this.refreshExercises();
     };
 }

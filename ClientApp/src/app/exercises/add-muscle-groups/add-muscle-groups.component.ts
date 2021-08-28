@@ -1,10 +1,9 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 
-import { IExercises } from '../../models/IExcercises';
 import { IMuscleGroups } from '../../models/IMuscleGroups';
-import { IWorkoutType } from '../../models/IWorkoutType';
 import { WorkoutService } from '../../services/workout.services';
 
 @Component({
@@ -25,7 +24,7 @@ export class AddMuscleGroupsComponent implements OnInit {
   editFieldsForm: FormGroup;
 
   constructor(private workoutService: WorkoutService,
-              private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.editFieldsForm = this.formBuilder.group({

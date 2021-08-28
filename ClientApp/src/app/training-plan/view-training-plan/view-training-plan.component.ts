@@ -90,7 +90,8 @@ export class ViewTrainingPlanComponent implements OnInit {
 
   onRecordUpdated(updateSucessful: boolean)
     {
-      this.recordUpdated.emit(updateSucessful);
+    this.recordUpdated.emit(updateSucessful);
+    this.refreshTrainingPlan();
     };
 
 }
