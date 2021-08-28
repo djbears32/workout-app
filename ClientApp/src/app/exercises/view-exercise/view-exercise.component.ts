@@ -4,6 +4,7 @@ import { WorkoutService } from '../../services/workout.services'
 import { finalize } from 'rxjs/operators';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatSort, MatTableDataSource } from '@angular/material';
+import { IMuscleGroups } from '../../models/IMuscleGroups';
 
 @Component({
   selector: 'app-view-exercise',
@@ -14,6 +15,7 @@ export class ViewExerciseComponent implements OnInit {
   errorMessage: string;
   isLoadingData = true;
   editExercise = false;
+  editMuscleGroup = false;
 
   dataSource: MatTableDataSource<IExercises>;
   displayedColumns = ['exerciseName','muscleGroupId'];
@@ -29,6 +31,11 @@ export class ViewExerciseComponent implements OnInit {
     exerciseName: null,
     muscleGroupId: 0
   };
+
+  editMuscleGroupObj: IMuscleGroups = {
+    muscleGroupId: 0,
+    muscleGroupName: null
+  }
 
   constructor(private workoutService: WorkoutService) { }
 
@@ -53,9 +60,22 @@ export class ViewExerciseComponent implements OnInit {
       this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
-    toggleEdit() {
-      this.editExercise = !this.editExercise;
+  toggleExerciseEdit() {
+    this.editExercise = !this.editExercise;
+    if (this.editExercise == true)
+    {
+      this.editMuscleGroup = false;
     }
+    
+  }
+
+  toggleMuscleGroupEdit() {
+    this.editMuscleGroup = !this.editMuscleGroup;
+    if (this.editMuscleGroup == true)
+    {
+      this.editExercise = false;
+    }
+  }
 
     onRecordUpdated(updateSucessful: boolean)
     {

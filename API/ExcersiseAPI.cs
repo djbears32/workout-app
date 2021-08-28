@@ -150,6 +150,17 @@ namespace workout_app.API
             this.unitOfWork.Commit();
         }
 
+        public void addMuscleGroups(MuscleGroupViewModel muscleGroupInfoFrom)
+            {
+            var muscleGroupEntity = new MuscleGroup
+            {
+                MuscleGroupName = muscleGroupInfoFrom.MuscleGroupName
+            };
+            
+            this.muscleGroupRepo.Add(muscleGroupEntity);
+            this.unitOfWork.Commit();
+        }
+
         public void AddTrainingPlans(TrainingPlanViewModel trainingPlanInfoForm)
         {
             var trainingPlanEntity = new TrainingPlan

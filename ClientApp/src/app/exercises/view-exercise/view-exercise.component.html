@@ -31,11 +31,16 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
     </mat-form-field>
 
-    <div>
-        <button class="btn btn-primary" mat-raised-button (click)="toggleEdit()">Add</button>
+    <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px">
+      <button class="btn btn-primary" mat-raised-button (click)="toggleExerciseEdit()">Add Exercise</button>
+      <button class="btn btn-primary" mat-raised-button (click)="toggleMuscleGroupEdit()">Add Muscle Group</button>
     </div>
 
 <div *ngIf="editExercise === true">
-    <app-add-exercise (editClosed)="toggleEdit()" [exerciseData]="editExerciseObj" (recordUpdated)="onRecordUpdated($event)"></app-add-exercise>
+    <app-add-exercise (editClosed)="toggleExerciseEdit()" [exerciseData]="editExerciseObj" (recordUpdated)="onRecordUpdated($event)"></app-add-exercise>
+</div>
+
+<div *ngIf="editMuscleGroup === true">
+    <app-add-muscle-groups (editClosed)="toggleMuscleGroupEdit()" [muscleGroupData]="editMuscleGroupObj" (recordUpdated)="onRecordUpdated($event)"></app-add-muscle-groups>
 </div>
 

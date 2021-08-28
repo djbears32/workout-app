@@ -87,6 +87,20 @@ namespace workout_app.Controllers
             }
         }
 
+        [HttpPost("addmusclegroups")]
+        public ActionResult AddMuscleGroups(MuscleGroupViewModel vm)
+        {
+            try
+            {
+                this.exerciseAPI.addMuscleGroups(vm);
+               return Ok();
+            }
+            catch
+            {
+                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Adding muscle Group failed");
+            }
+        }
+
         [HttpPost("addtrainingplans")]
         public ActionResult AddTrainingPlans(TrainingPlanViewModel vm)
         {

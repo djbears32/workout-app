@@ -55,8 +55,7 @@ export class AddExerciseComponent implements OnInit {
     )
     .subscribe(
       () => this.completeFormSubmission(),
-      (error: Error) => this.errorMessage = error.message
-    );
+      (error: Error) => this.errorMessage = error.message);
   }
 
   completeFormSubmission() {
