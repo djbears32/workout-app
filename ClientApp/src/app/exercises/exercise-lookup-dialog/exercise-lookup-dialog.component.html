@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Search Exercises</h2>
+<mat-dialog-content>
+
+    <mat-form-field color="accent">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+
+            <div class="mat-elevation-z8"> 
+                <table class="w-100" mat-table [dataSource]="dataSource" matSort>
+            
+                    <ng-container matColumnDef="exerciseName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Exercise Name</th>
+                        <td mat-cell *matCellDef="let entry">{{ entry.exerciseName }}</td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="muscleGroupId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Muscle Group</th>
+                        <td mat-cell *matCellDef="let entry">{{ entry.muscleGroupId }}</td>
+                    </ng-container>
+            
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row (click)="getRecord(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            
+                <mat-paginator color="accent" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button id="okButton" mat-button
+    [mat-dialog-close]="exerciseSearchResult"
+    class="btn btn-primary" 
+    mat-raised-button
+    matTooltip="Adds selected exercise to Training Plan">
+        Ok
+    </button>
+    <button class="btn btn-primary" mat-raised-button (click)="close()" matTooltip="Exit dialog box">
+        Close
+    </button>
+</mat-dialog-actions>

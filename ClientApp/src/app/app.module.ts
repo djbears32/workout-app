@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { MatTableModule, MatSelectModule, MatInputModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatTableModule, MatSelectModule, MatInputModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule, MatDialogModule } from '@angular/material';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +19,7 @@ import { ViewWorkoutComponent } from './workout/view-workout/view-workout.compon
 import { ViewTrainingPlanComponent } from './training-plan/view-training-plan/view-training-plan.component';
 import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-training-plan.component';
 import { WorkoutLookupDialogComponent } from './workout/workout-lookup-dialog/workout-lookup-dialog.component';
+import { ExerciseLookupDialogComponent } from './exercises/exercise-lookup-dialog/exercise-lookup-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,13 +33,15 @@ import { WorkoutLookupDialogComponent } from './workout/workout-lookup-dialog/wo
     ViewWorkoutComponent,
     ViewTrainingPlanComponent,
     AddTrainingPlanComponent,
-    WorkoutLookupDialogComponent
+    WorkoutLookupDialogComponent,
+    ExerciseLookupDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule, 
     MatTableModule,
