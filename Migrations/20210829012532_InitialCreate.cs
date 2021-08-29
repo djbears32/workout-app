@@ -89,14 +89,15 @@ namespace workout_app.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Weight = table.Column<int>(type: "int", nullable: false),
                     Reps = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExerciseId = table.Column<long>(type: "bigint", nullable: true)
+                    ExerciseId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExercisesExerciseId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Workouts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Workouts_Exercises_ExerciseId",
-                        column: x => x.ExerciseId,
+                        name: "FK_Workouts_Exercises_ExercisesExerciseId",
+                        column: x => x.ExercisesExerciseId,
                         principalTable: "Exercises",
                         principalColumn: "ExerciseId",
                         onDelete: ReferentialAction.Restrict);
@@ -126,8 +127,7 @@ namespace workout_app.Migrations
                     Exercise6 = table.Column<int>(type: "int", nullable: false),
                     Exercise7 = table.Column<int>(type: "int", nullable: false),
                     Exercise8 = table.Column<int>(type: "int", nullable: false),
-                    Exercise9 = table.Column<int>(type: "int", nullable: false),
-                    WorkoutsId = table.Column<int>(type: "int", nullable: true)
+                    Exercise9 = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,12 +138,6 @@ namespace workout_app.Migrations
                         principalTable: "TrainingPlans",
                         principalColumn: "TrainingPlanId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_WorkoutSessions_Workouts_WorkoutsId",
-                        column: x => x.WorkoutsId,
-                        principalTable: "Workouts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -157,9 +151,9 @@ namespace workout_app.Migrations
                 column: "WorkoutTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Workouts_ExerciseId",
+                name: "IX_Workouts_ExercisesExerciseId",
                 table: "Workouts",
-                column: "ExerciseId");
+                column: "ExercisesExerciseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Workouts_TrainingPlanId",
@@ -170,20 +164,15 @@ namespace workout_app.Migrations
                 name: "IX_WorkoutSessions_TrainingPlanId",
                 table: "WorkoutSessions",
                 column: "TrainingPlanId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkoutSessions_WorkoutsId",
-                table: "WorkoutSessions",
-                column: "WorkoutsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "WorkoutSessions");
+                name: "Workouts");
 
             migrationBuilder.DropTable(
-                name: "Workouts");
+                name: "WorkoutSessions");
 
             migrationBuilder.DropTable(
                 name: "Exercises");

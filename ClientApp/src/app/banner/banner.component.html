@@ -9,10 +9,9 @@
           [ngClass]="{ show: isExpanded }"
         >
           <ul class="navbar-nav flex-grow">
-            <li
-              class="nav-item"
-              [routerLinkActive]="['link-active']"
-              [routerLinkActiveOptions]="{ exact: true }">
+            <li class="nav-item"
+                [routerLinkActive]="['link-active']"
+                [routerLinkActiveOptions]="{ exact: true }">
               <button class="btn btn-primary" [routerLink]="['/']">Home</button>
             </li>
 
@@ -24,22 +23,23 @@
             </li>
 
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <button class="btn btn-primary"mat-button [matMenuTriggerFor]="workoutMenu">Workout</button>
-              <mat-menu #workoutMenu="matMenu">
-                <button class="btn btn-primary" mat-menu-item [routerLink]="['/add-workout']">Add Workout</button>
-              </mat-menu>
-            </li>
-
-            <li class="nav-item" [routerLinkActive]="['link-active']">
-              <button class="btn btn-primary"mat-button [matMenuTriggerFor]="trainingPlanMenu">Training Plan</button>
+              <button class="btn btn-primary" mat-button [matMenuTriggerFor]="trainingPlanMenu">Training Plan</button>
               <mat-menu #trainingPlanMenu="matMenu">
                 <button class="btn btn-primary" mat-menu-item [routerLink]="['/view-training-plan']">View Training Plan</button>
               </mat-menu>
             </li>
 
             <li class="nav-item" [routerLinkActive]="['link-active']">
-              <button class="btn btn-primary" [routerLink]="['/fetch-data']"
-                >Fetch data</button>
+              <button class="btn btn-primary" mat-button [matMenuTriggerFor]="workoutMenu">Workout</button>
+              <mat-menu #workoutMenu="matMenu">
+                <button class="btn btn-primary" mat-menu-item [routerLink]="['/add-workout']">Add Workout</button>
+              </mat-menu>
+            </li>
+
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <button class="btn btn-primary" [routerLink]="['/fetch-data']">
+                Fetch data
+              </button>
             </li>
           </ul>
         </div>

@@ -73,7 +73,6 @@ export class AddExerciseComponent implements OnInit {
     )
       .subscribe((muscleGroupsData: IMuscleGroups[]) => {
         this.muscleGroups = muscleGroupsData;
-        console.log(this.muscleGroups);
       },
         (error: Error) => this.errorMessage = error.message);
     }

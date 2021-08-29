@@ -50,5 +50,10 @@ export class WorkoutService {
     return this.httpClient.post(apiUrl, trainingPlanData);
   }
 
+  addWorkoutSessions(workoutSessionData) {
+    var apiUrl = 'api/workout/addworkoutsessions';
+    return this.httpClient.post(apiUrl, workoutSessionData);
+  }
+
 
 }

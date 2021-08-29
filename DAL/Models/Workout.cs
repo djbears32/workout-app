@@ -16,6 +16,5 @@ namespace workout_app.DAL.Models
          
         public virtual TrainingPlan TrainingPlan { get; set; }
         public virtual Exercise Exercises { get; set; }
-        public virtual ICollection<WorkoutSession> WorkoutSession { get; private set;}
     }
 }

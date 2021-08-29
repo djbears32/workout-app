@@ -114,5 +114,19 @@ namespace workout_app.Controllers
                 return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Adding training plans failed");
             }
         }
+
+        [HttpPost("addworkoutsessions")]
+        public ActionResult AddWorkoutSessions(WorkoutSessionViewModel vm)
+        {
+            try
+            {
+                this.exerciseAPI.AddWorkoutSessions(vm);
+               return Ok();
+            }
+            catch
+            {
+                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Adding training plans failed");
+            }
+        }
     }
 }

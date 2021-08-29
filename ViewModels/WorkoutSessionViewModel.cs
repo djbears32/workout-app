@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-
-namespace workout_app.DAL.Models
+namespace workout_app.ViewModels
 {
-    public class WorkoutSession
+    public class WorkoutSessionViewModel
     {
         public long Id { get; set; }
         public long TrainingPlanId { get; set; }
@@ -21,7 +18,5 @@ namespace workout_app.DAL.Models
         public int Exercise7 { get; set; }
         public int Exercise8 { get; set; }
         public int Exercise9 { get; set; }
-
-        public virtual TrainingPlan TrainingPlan { get; set; }
     }
 }

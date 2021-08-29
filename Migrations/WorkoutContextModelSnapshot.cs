@@ -97,7 +97,10 @@ namespace workout_app.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("ExerciseId")
+                    b.Property<string>("ExerciseId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("ExercisesExerciseId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Reps")
@@ -117,7 +120,7 @@ namespace workout_app.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExerciseId");
+                    b.HasIndex("ExercisesExerciseId");
 
                     b.HasIndex("TrainingPlanId");
 
@@ -170,14 +173,9 @@ namespace workout_app.Migrations
                     b.Property<int>("WorkoutDayId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("WorkoutsId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TrainingPlanId");
-
-                    b.HasIndex("WorkoutsId");
 
                     b.ToTable("WorkoutSessions");
                 });
@@ -223,7 +221,7 @@ namespace workout_app.Migrations
                 {
                     b.HasOne("workout_app.DAL.Models.Exercise", "Exercises")
                         .WithMany("Workouts")
-                        .HasForeignKey("ExerciseId");
+                        .HasForeignKey("ExercisesExerciseId");
 
                     b.HasOne("workout_app.DAL.Models.TrainingPlan", "TrainingPlan")
                         .WithMany("Workout")
@@ -244,13 +242,7 @@ namespace workout_app.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("workout_app.DAL.Models.Workout", "Workouts")
-                        .WithMany("WorkoutSession")
-                        .HasForeignKey("WorkoutsId");
-
                     b.Navigation("TrainingPlan");
-
-                    b.Navigation("Workouts");
                 });
 
             modelBuilder.Entity("workout_app.DAL.Models.Exercise", b =>
@@ -266,11 +258,6 @@ namespace workout_app.Migrations
             modelBuilder.Entity("workout_app.DAL.Models.TrainingPlan", b =>
                 {
                     b.Navigation("Workout");
-                });
-
-            modelBuilder.Entity("workout_app.DAL.Models.Workout", b =>
-                {
-                    b.Navigation("WorkoutSession");
                 });
 
             modelBuilder.Entity("workout_app.DAL.Models.WorkoutType", b =>

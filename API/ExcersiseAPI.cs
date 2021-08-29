@@ -12,19 +12,22 @@ namespace workout_app.API
         DAL.Repositories.IMuscleGroupRepository muscleGroupRepo;
         DAL.Repositories.ITrainingPlanRepository trainingPlanRepo;
         DAL.Repositories.IWorkoutTypeRepository workoutTypeRepo;
+        DAL.Repositories.IWorkoutSessionRepository workoutSessionRepo;
 
         public ExerciseAPI(
             DAL.UnitOfWork.IUnitOfWork unitOfWork,
             DAL.Repositories.IExerciseRepository exerciseRepo,
             DAL.Repositories.IMuscleGroupRepository muscleGroupRepo,
             DAL.Repositories.ITrainingPlanRepository trainingPlanRepo,
-            DAL.Repositories.IWorkoutTypeRepository workoutTypeRepo)
+            DAL.Repositories.IWorkoutTypeRepository workoutTypeRepo,
+            DAL.Repositories.IWorkoutSessionRepository workoutSessionRepo)
             {
                 this.unitOfWork = unitOfWork;
                 this.exerciseRepo = exerciseRepo;
                 this.muscleGroupRepo = muscleGroupRepo;
                 this.trainingPlanRepo = trainingPlanRepo;
                 this.workoutTypeRepo = workoutTypeRepo;
+                this.workoutSessionRepo = workoutSessionRepo;
             }
         public List<ViewModels.ExerciseViewModel> GetExercises()
         {
@@ -174,6 +177,29 @@ namespace workout_app.API
             };
             
             this.trainingPlanRepo.Add(trainingPlanEntity);
+            this.unitOfWork.Commit();
+        }
+
+        public void AddWorkoutSessions(WorkoutSessionViewModel workoutSessionInfoForm)
+        {
+            var workoutSessionEntity = new WorkoutSession
+            {
+                TrainingPlanId = workoutSessionInfoForm.TrainingPlanId,
+                WorkoutDate = workoutSessionInfoForm.WorkoutDate,
+                WeekId = workoutSessionInfoForm.WeekId,
+                WorkoutDayId = workoutSessionInfoForm.WorkoutDayId,
+                Exercise1 = workoutSessionInfoForm.Exercise1,
+                Exercise2 = workoutSessionInfoForm.Exercise2,
+                Exercise3 = workoutSessionInfoForm.Exercise3,
+                Exercise4 = workoutSessionInfoForm.Exercise4,
+                Exercise5 = workoutSessionInfoForm.Exercise5,
+                Exercise6 = workoutSessionInfoForm.Exercise6,
+                Exercise7 = workoutSessionInfoForm.Exercise7,
+                Exercise8 = workoutSessionInfoForm.Exercise8,
+                Exercise9 = workoutSessionInfoForm.Exercise9,
+            };
+
+            this.workoutSessionRepo.Add(workoutSessionEntity);
             this.unitOfWork.Commit();
         }
     }

@@ -75,17 +75,17 @@ export class ViewTrainingPlanComponent implements OnInit {
     this.editTrainingPlan = !this.editTrainingPlan;
   }
 
-  openExerciseSearchDialog() {
+  openExerciseSearchDialog(trainingPlan: ITrainingPlan) {
 
-    const dialogRef = this.dialog.open(ExerciseLookupDialogComponent, { width: '1000px', data:this.selectedExercise });
+    const dialogRef = this.dialog.open(ExerciseLookupDialogComponent, { width: '1000px', data: trainingPlan });
 
-    dialogRef.afterClosed()
-      .pipe()
-      .subscribe(results => {
-        this.selectedExercise = results.exerciseId;
-        this.selectedExercise = results.exerciseName;
-        this.selectedExercise = results.muscleGroupId;
-      })
+    //dialogRef.afterClosed()
+    //  .pipe()
+    //  .subscribe(results => {
+    //    this.selectedExercise = results.exerciseId;
+    //    this.selectedExercise = results.exerciseName;
+    //    this.selectedExercise = results.muscleGroupId;
+    //  })
   }
 
   onRecordUpdated(updateSucessful: boolean)
