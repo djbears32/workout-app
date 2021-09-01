@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { IExercises } from 'src/app/models/IExcercises';
 import { ITrainingPlan } from 'src/app/models/ITrainingPlan';
-import { IWorkoutSession } from 'src/app/models/IWorkoutSession';
 import { WorkoutService } from 'src/app/services/workout.services';
 
 @Component({
@@ -23,10 +22,8 @@ export class ExerciseLookupDialogComponent implements OnInit {
   dataSource: MatTableDataSource<IExercises>;
   displayedColumns = ['exerciseName', 'muscleGroupId'];
 
-  trainingPlanSearchResult: ITrainingPlan;
-  exerciseSearchResult: IExercises[] = [];
-
-  workoutSessionData: IWorkoutSession;
+  trainingPlanData: ITrainingPlan;
+  exerciseSearchResult: IExercises[];
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
@@ -35,7 +32,7 @@ export class ExerciseLookupDialogComponent implements OnInit {
               public dialogRef: MatDialogRef<ExerciseLookupDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) 
               { 
-                  this.trainingPlanSearchResult = data;
+    this.trainingPlanData = data;
               }
 
   ngOnInit() {
@@ -60,27 +57,11 @@ export class ExerciseLookupDialogComponent implements OnInit {
 
   getRecord(exercise: IExercises)
   {
-    this.exerciseSearchResult.push(exercise);
+    this.exerciseSearchResult = exercise;
     console.log(this.exerciseSearchResult);
-    console.log(this.trainingPlanSearchResult);
   }
 
   close() {
     this.dialogRef.close();
   }
-
-  //addWorkoutSession() {
-  //  this.workoutService.addWorkoutSessions(this.workoutSessionData)
-  //   .pipe(
-  //     finalize(() => { this.saving = false })
-  //   )
-  //      .subscribe(
-  //        () => this.completeFormSubmission(),
-  //        (error: Error) => this.errorMessage = error.message);
-  //}
-
-  //completeFormSubmission() {
-  //  this.editClosed.emit();
-  //  this.recordUpdated.emit(true);
-  //}
 }

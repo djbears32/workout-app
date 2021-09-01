@@ -4,6 +4,7 @@ import { IExercises } from "../models/IExcercises";
 import { IMuscleGroups } from "../models/IMuscleGroups";
 import { ITrainingPlan } from "../models/ITrainingPlan";
 import { IWorkoutType } from "../models/IWorkoutType";
+import { IWorkoutSession } from "../models/IWorkoutSession";
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,12 @@ export class WorkoutService {
   }
 
   getWorkoutTypes() {
-    var apiUrl = 'api/workout/getworkouttypess';
+    var apiUrl = 'api/workout/getworkouttypes';
     return this.httpClient.get<IWorkoutType[]>(apiUrl);
+  }
+  getWorkoutSessions() {
+    var apiUrl = 'api/workout/getworkoutsession';
+    return this.httpClient.get<IWorkoutSession[]>(apiUrl);
   }
 
   updateExercises(exerciseData) {
@@ -50,7 +55,7 @@ export class WorkoutService {
     return this.httpClient.post(apiUrl, trainingPlanData);
   }
 
-  addWorkoutSessions(workoutSessionData) {
+  updateWorkoutSessions(workoutSessionData) {
     var apiUrl = 'api/workout/addworkoutsessions';
     return this.httpClient.post(apiUrl, workoutSessionData);
   }

@@ -141,6 +141,55 @@ namespace workout_app.API
             return workoutTypeInfoList;
         }
 
+        public List<ViewModels.WorkoutSessionViewModel> getWorkoutSessions()
+        {
+            var workoutSessionInfoList = new List<ViewModels.WorkoutSessionViewModel>();
+
+            var workoutSessionInfo = this.workoutSessionRepo.GetQueryable()
+                .Where(x => x.Id != 0);
+
+            workoutSessionInfoList = workoutSessionInfo
+                .Select(entry => new
+                {
+                    entry.Id,
+                    entry.TrainingPlanId,
+                    entry.WorkoutDate,
+                    entry.WeekId,
+                    entry.WorkoutDayId,
+                    entry.Exercise1,
+                    entry.Exercise2,
+                    entry.Exercise3,
+                    entry.Exercise4,
+                    entry.Exercise5,
+                    entry.Exercise6,
+                    entry.Exercise7,
+                    entry.Exercise8,
+                    entry.Exercise9
+                })
+                .OrderBy(entry => entry.Id)
+                .ToList()
+                .Select(entry => new WorkoutSessionViewModel
+                {
+                    Id = entry.Id,
+                    TrainingPlanId = entry.TrainingPlanId,
+                    WorkoutDate = entry.WorkoutDate,
+                    WeekId = entry.WeekId,
+                    WorkoutDayId = entry.WorkoutDayId,
+                    Exercise1 = entry.Exercise1,
+                    Exercise2 = entry.Exercise2,
+                    Exercise3 = entry.Exercise3,
+                    Exercise4 = entry.Exercise4,
+                    Exercise5 = entry.Exercise5,
+                    Exercise6 = entry.Exercise6,
+                    Exercise7 = entry.Exercise7,
+                    Exercise8 = entry.Exercise8,
+                    Exercise9 = entry.Exercise9
+                })
+                .ToList();
+
+            return workoutSessionInfoList;
+        }
+
         public void addExercises(ExerciseViewModel exerciseInfoForm)
         {
             var exerciseEntity = new Exercise

@@ -79,13 +79,6 @@ export class ViewTrainingPlanComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ExerciseLookupDialogComponent, { width: '1000px', data: trainingPlan });
 
-    //dialogRef.afterClosed()
-    //  .pipe()
-    //  .subscribe(results => {
-    //    this.selectedExercise = results.exerciseId;
-    //    this.selectedExercise = results.exerciseName;
-    //    this.selectedExercise = results.muscleGroupId;
-    //  })
   }
 
   onRecordUpdated(updateSucessful: boolean)
