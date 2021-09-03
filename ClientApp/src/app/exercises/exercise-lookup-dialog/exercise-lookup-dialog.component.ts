@@ -23,7 +23,7 @@ export class ExerciseLookupDialogComponent implements OnInit {
   displayedColumns = ['exerciseName', 'muscleGroupId'];
 
   trainingPlanData: ITrainingPlan;
-  exerciseSearchResult: IExercises[];
+  exerciseSearchResult: IExercises;
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;

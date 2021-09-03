@@ -6,6 +6,7 @@ import { MatTableModule, MatSelectModule, MatInputModule, MatMenuModule, MatDate
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -52,6 +53,7 @@ import { EditTrainingPlanComponent } from './training-plan/edit-training-plan/ed
     MatPaginatorModule,
     MatInputModule,
     MatSelectModule,
+    MatIconModule,
     MatMenuModule,
     FlexLayoutModule,
     RouterModule.forRoot([
@@ -69,4 +71,5 @@ import { EditTrainingPlanComponent } from './training-plan/edit-training-plan/ed
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {  }
+

@@ -3,6 +3,7 @@
 /* Provide sufficient contrast against white background */
 
 @import "../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import '~material-design-icons/iconfont/material-icons.css';
 
 
 body{
