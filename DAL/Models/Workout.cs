@@ -11,10 +11,9 @@ namespace workout_app.DAL.Models
         public int WorkoutDayId { get; set; }
         public DateTime Date { get; set; } 
         public int Weight { get; set; }
-        public string Reps { get; set; }
-        public string ExerciseId { get; set; } 
+        public string Reps { get; set; } 
          
         public virtual TrainingPlan TrainingPlan { get; set; }
-        public virtual Exercise Exercises { get; set; }
+        public virtual ICollection<Exercise> Exercises { get; set; }
     }
 }

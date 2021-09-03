@@ -60,12 +60,25 @@ namespace workout_app.Controllers
             }
         }
 
-        [HttpGet("getworkouttypess")]
+        [HttpGet("getworkouttypes")]
         public ActionResult getWorkoutTypes()
         {
             try
             {
                return Ok(this.exerciseAPI.getWorkoutTypes());
+            }
+            catch
+            {
+                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Call to get training plans failed");
+            }
+        }
+
+        [HttpGet("getworkoutsession")]
+        public ActionResult getWorkoutSessions()
+        {
+            try
+            {
+               return Ok(this.exerciseAPI.getWorkoutSessions());
             }
             catch
             {
@@ -125,7 +138,7 @@ namespace workout_app.Controllers
             }
             catch
             {
-                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Adding training plans failed");
+                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Adding workout sessions failed");
             }
         }
     }

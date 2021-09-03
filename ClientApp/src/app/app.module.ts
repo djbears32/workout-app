@@ -6,6 +6,7 @@ import { MatTableModule, MatSelectModule, MatInputModule, MatMenuModule, MatDate
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -21,6 +22,7 @@ import { AddTrainingPlanComponent } from './training-plan/add-training-plan/add-
 import { WorkoutLookupDialogComponent } from './workout/workout-lookup-dialog/workout-lookup-dialog.component';
 import { ExerciseLookupDialogComponent } from './exercises/exercise-lookup-dialog/exercise-lookup-dialog.component';
 import { AddMuscleGroupsComponent } from './exercises/add-muscle-groups/add-muscle-groups.component';
+import { EditTrainingPlanComponent } from './training-plan/edit-training-plan/edit-training-plan.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { AddMuscleGroupsComponent } from './exercises/add-muscle-groups/add-musc
     AddTrainingPlanComponent,
     WorkoutLookupDialogComponent,
     ExerciseLookupDialogComponent,
-    AddMuscleGroupsComponent
+    AddMuscleGroupsComponent,
+    EditTrainingPlanComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -50,6 +53,7 @@ import { AddMuscleGroupsComponent } from './exercises/add-muscle-groups/add-musc
     MatPaginatorModule,
     MatInputModule,
     MatSelectModule,
+    MatIconModule,
     MatMenuModule,
     FlexLayoutModule,
     RouterModule.forRoot([
@@ -58,7 +62,8 @@ import { AddMuscleGroupsComponent } from './exercises/add-muscle-groups/add-musc
       { path: 'add-workout', component: AddWorkoutComponent },
       { path: 'view-exercise', component: ViewExerciseComponent },
       { path: 'view-training-plan', component: ViewTrainingPlanComponent },
-      { path: 'add-training-plan', component: AddTrainingPlanComponent }
+      { path: 'add-training-plan', component: AddTrainingPlanComponent },
+      { path: 'edit-training-plan', component: EditTrainingPlanComponent }
     ]),
     BrowserAnimationsModule
   ],
@@ -66,4 +71,5 @@ import { AddMuscleGroupsComponent } from './exercises/add-muscle-groups/add-musc
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {  }
+
