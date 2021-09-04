@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BannerComponent } from './banner/banner.component';
 import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
 import { ViewExerciseComponent } from './exercises/view-exercise/view-exercise.component';
@@ -28,7 +27,6 @@ import { EditTrainingPlanComponent } from './training-plan/edit-training-plan/ed
   declarations: [
     AppComponent,
     HomeComponent,
-    FetchDataComponent,
     BannerComponent,
     AddWorkoutComponent,
     ViewExerciseComponent,
@@ -58,7 +56,6 @@ import { EditTrainingPlanComponent } from './training-plan/edit-training-plan/ed
     FlexLayoutModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'add-workout', component: AddWorkoutComponent },
       { path: 'view-exercise', component: ViewExerciseComponent },
       { path: 'view-training-plan', component: ViewTrainingPlanComponent },
