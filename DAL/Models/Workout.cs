@@ -6,7 +6,7 @@ namespace workout_app.DAL.Models
     public class Workout
     {
         public int WorkoutId { get; set; }
-        public long TrainingPlanId { get; set; }
+        public int TrainingPlanId { get; set; }
         public DateTime Date { get; set; }
          
         public virtual TrainingPlan TrainingPlan { get; set; }

@@ -11,7 +11,7 @@ namespace workout_app.Migrations
                 name: "MuscleGroups",
                 columns: table => new
                 {
-                    MuscleGroupId = table.Column<long>(type: "bigint", nullable: false)
+                    MuscleGroupId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MuscleGroupName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -24,7 +24,7 @@ namespace workout_app.Migrations
                 name: "WorkoutTypes",
                 columns: table => new
                 {
-                    WorkoutTypeId = table.Column<long>(type: "bigint", nullable: false)
+                    WorkoutTypeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     WorkoutTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -37,10 +37,10 @@ namespace workout_app.Migrations
                 name: "Exercises",
                 columns: table => new
                 {
-                    ExerciseId = table.Column<long>(type: "bigint", nullable: false)
+                    ExerciseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ExerciseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MuscleGroupId = table.Column<long>(type: "bigint", nullable: false)
+                    MuscleGroupId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,14 +57,14 @@ namespace workout_app.Migrations
                 name: "TrainingPlans",
                 columns: table => new
                 {
-                    TrainingPlanId = table.Column<long>(type: "bigint", nullable: false)
+                    TrainingPlanId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TrainingPlanName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     WorkoutLength = table.Column<int>(type: "int", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     WorkoutsPerWeek = table.Column<int>(type: "int", nullable: false),
-                    WorkoutTypeId = table.Column<long>(type: "bigint", nullable: false)
+                    WorkoutTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,7 +83,7 @@ namespace workout_app.Migrations
                 {
                     WorkoutId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TrainingPlanId = table.Column<long>(type: "bigint", nullable: false),
+                    TrainingPlanId = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -101,7 +101,7 @@ namespace workout_app.Migrations
                 name: "ExerciseWorkout",
                 columns: table => new
                 {
-                    ExercisesExerciseId = table.Column<long>(type: "bigint", nullable: false),
+                    ExercisesExerciseId = table.Column<int>(type: "int", nullable: false),
                     WorkoutsWorkoutId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -125,15 +125,17 @@ namespace workout_app.Migrations
                 name: "ExerciseWorkouts",
                 columns: table => new
                 {
-                    EWInfoId = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     WorkoutId = table.Column<int>(type: "int", nullable: false),
-                    ExerciseId = table.Column<long>(type: "bigint", nullable: false),
-                    Weight = table.Column<long>(type: "bigint", nullable: false),
-                    Reps = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ExerciseId = table.Column<int>(type: "int", nullable: false),
+                    Weight = table.Column<int>(type: "int", nullable: false),
+                    Reps = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExerciseWorkouts", x => new { x.EWInfoId, x.ExerciseId, x.WorkoutId });
+                    table.PrimaryKey("PK_ExerciseWorkouts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ExerciseWorkouts_Exercises_ExerciseId",
                         column: x => x.ExerciseId,

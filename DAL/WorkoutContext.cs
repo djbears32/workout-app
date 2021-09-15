@@ -31,10 +31,10 @@ namespace workout_app.DAL.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ExerciseWorkout>(entity => 
-            {
-                entity.HasKey( e => new { e.EWInfoId, e.ExerciseId, e.WorkoutId});
-            });
+            //modelBuilder.Entity<ExerciseWorkout>(entity => 
+            //{
+            //    entity.HasKey( e => new { e.EWInfoId, e.ExerciseId, e.WorkoutId});
+            //});
         }
     }
 }
