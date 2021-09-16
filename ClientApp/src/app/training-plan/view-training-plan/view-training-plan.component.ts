@@ -17,9 +17,12 @@ export class ViewTrainingPlanComponent implements OnInit {
   errorMessage: string;
   isLoadingData = true;
   editTrainingPlan = false;
+  editWorkoutType = false;
 
   dataSource: MatTableDataSource<ITrainingPlan>;
-  displayedColumns = ['trainingPlanName', 'startDate', 'workoutLength', 'endDate', 'workoutsPerWeek', 'workoutTypeId', 'action'];
+  displayedColumns = ['trainingPlanName', 'startDate', 'workoutLength', 'endDate', 'workoutsPerWeek', 'workoutTypeId',
+    //'action'
+  ];
 
   @Input() exerciseInfoData: IExercises;
 
@@ -41,8 +44,14 @@ export class ViewTrainingPlanComponent implements OnInit {
     workoutTypeId: 0
   };
 
+  editWorkoutTypeObj: IWorkoutType = {
+    workoutTypeId: 0,
+    workoutTypeName: null
+  }
+
   constructor(private workoutService: WorkoutService,
-              private dialog: MatDialog) { }
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.refreshTrainingPlan();
@@ -71,8 +80,18 @@ export class ViewTrainingPlanComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  toggleEdit() {
+  toggleTrainingPlanEdit() {
     this.editTrainingPlan = !this.editTrainingPlan;
+    if (this.editTrainingPlan == true) {
+      this.editWorkoutType = false;
+    }
+  }
+
+  toggleWorkoutTypeEdit() {
+    this.editWorkoutType = !this.editWorkoutType;
+    if (this.editWorkoutType == true) {
+      this.editTrainingPlan = false;
+    }
   }
 
   openExerciseSearchDialog(trainingPlan: ITrainingPlan) {

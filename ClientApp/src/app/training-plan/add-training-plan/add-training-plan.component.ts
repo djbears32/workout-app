@@ -87,8 +87,8 @@ export class AddTrainingPlanComponent implements OnInit {
           (error: Error) => this.errorMessage = error.message);
       }
   
-      getMuscleTypeId(name: string) {
-        var temp = this.workoutTypes.find( x => x.workoutTypeName === name).workoutTypeId
-        return temp
-      }
+      //getMuscleTypeId(name: string) {
+      //  var temp = this.workoutTypes.find( x => x.workoutTypeName === name).workoutTypeId
+      //  return temp
+      //}
 }

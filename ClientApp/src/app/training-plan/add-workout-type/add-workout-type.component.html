@@ -1,0 +1,27 @@
+<h3 class="title text-center">Add Workout Types</h3>
+<form class="contentContainer" [formGroup]="editFieldsForm" (ngSubmit)="submitEdit()">
+  <div>
+    <div fxLayoutAlign="center"
+         fxLayoutGap="20px"
+         fxlayoutAlign="space-between"
+         fxjLayout.sm="column"
+         fxLayout.xs="column">
+      <div>
+        <mat-form-field class="fullWidthField" color="accent">
+          <mat-label>Workout Type Name</mat-label>
+          <input type="text" matInput formControlName="workoutTypeName" required />
+        </mat-form-field>
+      </div>
+
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px">
+    <div>
+      <button class="btn btn-primary" type="submit" mat-raised-button [disabled]="editFieldsForm.invalid">Submit</button>
+    </div>
+    <span></span>
+    <div>
+      <button class="btn btn-primary" type="button" mat-raised-button (click)="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+</form>

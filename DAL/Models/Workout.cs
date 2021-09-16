@@ -10,6 +10,6 @@ namespace workout_app.DAL.Models
         public DateTime Date { get; set; }
          
         public virtual TrainingPlan TrainingPlan { get; set; }
-        public virtual ICollection<Exercise> Exercises { get; set; }
+        public virtual ICollection<Exercise> Exercise { get; set; }
     }
 }

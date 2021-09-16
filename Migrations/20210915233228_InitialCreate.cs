@@ -101,21 +101,21 @@ namespace workout_app.Migrations
                 name: "ExerciseWorkout",
                 columns: table => new
                 {
-                    ExercisesExerciseId = table.Column<int>(type: "int", nullable: false),
-                    WorkoutsWorkoutId = table.Column<int>(type: "int", nullable: false)
+                    ExerciseId = table.Column<int>(type: "int", nullable: false),
+                    WorkoutId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExerciseWorkout", x => new { x.ExercisesExerciseId, x.WorkoutsWorkoutId });
+                    table.PrimaryKey("PK_ExerciseWorkout", x => new { x.ExerciseId, x.WorkoutId });
                     table.ForeignKey(
-                        name: "FK_ExerciseWorkout_Exercises_ExercisesExerciseId",
-                        column: x => x.ExercisesExerciseId,
+                        name: "FK_ExerciseWorkout_Exercises_ExerciseId",
+                        column: x => x.ExerciseId,
                         principalTable: "Exercises",
                         principalColumn: "ExerciseId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ExerciseWorkout_Workouts_WorkoutsWorkoutId",
-                        column: x => x.WorkoutsWorkoutId,
+                        name: "FK_ExerciseWorkout_Workouts_WorkoutId",
+                        column: x => x.WorkoutId,
                         principalTable: "Workouts",
                         principalColumn: "WorkoutId",
                         onDelete: ReferentialAction.Cascade);
@@ -156,9 +156,9 @@ namespace workout_app.Migrations
                 column: "MuscleGroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExerciseWorkout_WorkoutsWorkoutId",
+                name: "IX_ExerciseWorkout_WorkoutId",
                 table: "ExerciseWorkout",
-                column: "WorkoutsWorkoutId");
+                column: "WorkoutId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExerciseWorkouts_ExerciseId",

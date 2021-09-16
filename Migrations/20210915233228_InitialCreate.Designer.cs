@@ -10,7 +10,7 @@ using workout_app.DAL.Models;
 namespace workout_app.Migrations
 {
     [DbContext(typeof(WorkoutContext))]
-    [Migration("20210915232256_InitialCreate")]
+    [Migration("20210915233228_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,15 +23,15 @@ namespace workout_app.Migrations
 
             modelBuilder.Entity("ExerciseWorkout", b =>
                 {
-                    b.Property<int>("ExercisesExerciseId")
+                    b.Property<int>("ExerciseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WorkoutsWorkoutId")
+                    b.Property<int>("WorkoutId")
                         .HasColumnType("int");
 
-                    b.HasKey("ExercisesExerciseId", "WorkoutsWorkoutId");
+                    b.HasKey("ExerciseId", "WorkoutId");
 
-                    b.HasIndex("WorkoutsWorkoutId");
+                    b.HasIndex("WorkoutId");
 
                     b.ToTable("ExerciseWorkout");
                 });
@@ -173,45 +173,45 @@ namespace workout_app.Migrations
                 {
                     b.HasOne("workout_app.DAL.Models.Exercise", null)
                         .WithMany()
-                        .HasForeignKey("ExercisesExerciseId")
+                        .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("workout_app.DAL.Models.Workout", null)
                         .WithMany()
-                        .HasForeignKey("WorkoutsWorkoutId")
+                        .HasForeignKey("WorkoutId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("workout_app.DAL.Models.Exercise", b =>
                 {
-                    b.HasOne("workout_app.DAL.Models.MuscleGroup", "MuscleGroups")
-                        .WithMany("Exercises")
+                    b.HasOne("workout_app.DAL.Models.MuscleGroup", "MuscleGroup")
+                        .WithMany("Exercise")
                         .HasForeignKey("MuscleGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("MuscleGroups");
+                    b.Navigation("MuscleGroup");
                 });
 
             modelBuilder.Entity("workout_app.DAL.Models.ExerciseWorkout", b =>
                 {
-                    b.HasOne("workout_app.DAL.Models.Exercise", "Exercises")
+                    b.HasOne("workout_app.DAL.Models.Exercise", "Exercise")
                         .WithMany()
                         .HasForeignKey("ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("workout_app.DAL.Models.Workout", "Workouts")
+                    b.HasOne("workout_app.DAL.Models.Workout", "Workout")
                         .WithMany()
                         .HasForeignKey("WorkoutId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Exercises");
+                    b.Navigation("Exercise");
 
-                    b.Navigation("Workouts");
+                    b.Navigation("Workout");
                 });
 
             modelBuilder.Entity("workout_app.DAL.Models.TrainingPlan", b =>
@@ -238,7 +238,7 @@ namespace workout_app.Migrations
 
             modelBuilder.Entity("workout_app.DAL.Models.MuscleGroup", b =>
                 {
-                    b.Navigation("Exercises");
+                    b.Navigation("Exercise");
                 });
 
             modelBuilder.Entity("workout_app.DAL.Models.TrainingPlan", b =>

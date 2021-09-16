@@ -49,4 +49,9 @@ export class WorkoutService {
     var apiUrl = 'api/workout/addtrainingplans';
     return this.httpClient.post(apiUrl, trainingPlanData);
   }
+
+  updateWorkoutTypes(workoutTypeData) {
+    var apiUrl = 'api/workout/addworkouttypes';
+    return this.httpClient.post(apiUrl, workoutTypeData);
+  }
 }

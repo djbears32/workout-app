@@ -176,5 +176,17 @@ namespace workout_app.API
             this.trainingPlanRepo.Add(trainingPlanEntity);
             this.unitOfWork.Commit();
         }
+
+        public void AddWorkoutTypes(ViewModels.WorkoutTypeViewModel workoutTypeInfoForm)
+        {
+            var workoutTypeEntity = new WorkoutType
+            {
+                WorkoutTypeId = workoutTypeInfoForm.WorkoutTypeId,
+                WorkoutTypeName = workoutTypeInfoForm.WorkoutTypeName
+            };
+
+            this.workoutTypeRepo.Add(workoutTypeEntity);
+            this.unitOfWork.Commit();
+        }
     }
 }

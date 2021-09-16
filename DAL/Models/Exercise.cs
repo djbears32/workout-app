@@ -8,7 +8,7 @@ namespace workout_app.DAL.Models
         public string ExerciseName { get; set; }
         public int MuscleGroupId { get; set; }
 
-        public virtual MuscleGroup MuscleGroups { get; set; }
-        public virtual ICollection<Workout> Workouts { get; private set; }
+        public virtual MuscleGroup MuscleGroup { get; set; }
+        public virtual ICollection<Workout> Workout { get; private set; }
     }
 }

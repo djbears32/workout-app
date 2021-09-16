@@ -22,6 +22,7 @@ import { WorkoutLookupDialogComponent } from './workout/workout-lookup-dialog/wo
 import { ExerciseLookupDialogComponent } from './exercises/exercise-lookup-dialog/exercise-lookup-dialog.component';
 import { AddMuscleGroupsComponent } from './exercises/add-muscle-groups/add-muscle-groups.component';
 import { EditTrainingPlanComponent } from './training-plan/edit-training-plan/edit-training-plan.component';
+import { AddWorkoutTypeComponent } from './training-plan/add-workout-type/add-workout-type.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EditTrainingPlanComponent } from './training-plan/edit-training-plan/ed
     WorkoutLookupDialogComponent,
     ExerciseLookupDialogComponent,
     AddMuscleGroupsComponent,
-    EditTrainingPlanComponent
+    EditTrainingPlanComponent,
+    AddWorkoutTypeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
