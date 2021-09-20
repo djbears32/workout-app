@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
-import { IExercises } from 'src/app/models/IExcercises';
+import { IExercises } from 'src/app/models/IExercises';
 import { WorkoutService } from '../../services/workout.services'
 import { finalize } from 'rxjs/operators';
 import { MatPaginator} from '@angular/material/paginator';

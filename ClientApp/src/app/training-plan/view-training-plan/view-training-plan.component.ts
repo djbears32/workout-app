@@ -6,7 +6,7 @@ import { MatPaginator} from '@angular/material/paginator';
 import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
 import { ExerciseLookupDialogComponent } from 'src/app/exercises/exercise-lookup-dialog/exercise-lookup-dialog.component';
 import { IWorkoutType } from 'src/app/models/IWorkoutType';
-import { IExercises } from 'src/app/models/IExcercises';
+import { IExercises } from 'src/app/models/IExercises';
 
 @Component({
   selector: 'app-view-training-plan',

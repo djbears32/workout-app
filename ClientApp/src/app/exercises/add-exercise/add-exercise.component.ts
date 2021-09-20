@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 
-import { IExercises } from 'src/app/models/IExcercises';
+import { IExercises } from 'src/app/models/IExercises';
 import { IMuscleGroups } from 'src/app/models/IMuscleGroups';
 import { WorkoutService } from 'src/app/services/workout.services';
 

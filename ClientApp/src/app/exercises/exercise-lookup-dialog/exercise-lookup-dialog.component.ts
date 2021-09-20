@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialogRef, MatPaginator, MatSort, MatTableDataSource, MAT_DIALOG_DATA } from '@angular/material';
 import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { IExercises } from 'src/app/models/IExcercises';
+import { IExercises } from 'src/app/models/IExercises';
 import { ITrainingPlan } from 'src/app/models/ITrainingPlan';
 import { WorkoutService } from 'src/app/services/workout.services';
 

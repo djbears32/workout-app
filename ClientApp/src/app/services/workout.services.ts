@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { IExercises } from "../models/IExcercises";
+import { IExercises } from "../models/IExercises";
 import { IMuscleGroups } from "../models/IMuscleGroups";
 import { ITrainingPlan } from "../models/ITrainingPlan";
 import { IWorkoutType } from "../models/IWorkoutType";

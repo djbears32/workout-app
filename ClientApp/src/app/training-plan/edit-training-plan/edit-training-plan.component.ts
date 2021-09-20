@@ -3,8 +3,10 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { ExerciseLookupDialogComponent } from '../../exercises/exercise-lookup-dialog/exercise-lookup-dialog.component';
-import { IExercises } from '../../models/IExcercises';
+import { IExercises } from '../../models/IExercises';
+import { IExerciseWorkout } from '../../models/IExerciseWorkout';
 import { ITrainingPlan } from '../../models/ITrainingPlan';
+import { IWorkout } from '../../models/IWorkout';
 import { WorkoutService } from '../../services/workout.services';
 
 @Component({
@@ -21,6 +23,22 @@ export class EditTrainingPlanComponent implements OnInit {
   saving = false;
   workoutsWeekly = 0;  //stores trainingplan.workoutsperweek value set by user in first dropdown
   currentWorkout = 1; //stores current workoutsession value
+
+  exerciseWorkoutData: IExerciseWorkout = {
+  id: 0,
+  workoutId: 0,
+  exerciseId: 0,
+  weight: null,
+  reps: null,
+  inactive: true
+  } //generic model passed to form group
+
+  workoutData: IWorkout = {
+    workoutId: 0,
+    trainingPlanId: 0,
+    date: null
+  }
+
   exerciseHolder = {} as IExercises[]; //stores exercise returned from add exercises dialog
 
   trainingPlans = {} as ITrainingPlan[];
@@ -29,14 +47,49 @@ export class EditTrainingPlanComponent implements OnInit {
 
 
   constructor(private workoutService: WorkoutService,
-    private dialog: MatDialog ) { }
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder  ) { }
 
   ngOnInit() {
     this.loadDropdown();
+
+    this.editFieldsForm = this.formBuilder.group({
+      id: [this.exerciseWorkoutData.id],
+      workoutId: [this.exerciseWorkoutData.workoutId],
+      exerciseId: [this.exerciseWorkoutData.exerciseId]
+    });
   }
 
   submitEdit() {
     this.saving = true;
+    let submittedForm: IExerciseWorkout = {
+      id: -1,
+      workoutId: -1,
+      exerciseId: this.editFieldsForm.get('exerciseId').value,
+      weight: null,
+      reps: null,
+      inactive: true
+    }
+      //this.workoutService.updateExercises(submittedForm)
+      .pipe(
+        finalize(() => { this.saving = false })
+      )
+      .subscribe(
+        () => this.completeFormSubmission(),
+        (error: Error) => this.errorMessage = error.message);
+
+    let submittedFrom: IWorkout = {
+      workoutId: -1,
+      trainingPlanId: 0,
+      date: null
+    }
+    //this.workoutService.updateExercises(submittedForm)
+      .pipe(
+        finalize(() => { this.saving = false })
+      )
+      .subscribe(
+        () => this.completeFormSubmission(),
+        (error: Error) => this.errorMessage = error.message);
   }
 
   completeFormSubmission() {
