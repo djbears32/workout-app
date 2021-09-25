@@ -10,7 +10,7 @@ using workout_app.DAL.Models;
 namespace workout_app.Migrations
 {
     [DbContext(typeof(WorkoutContext))]
-    [Migration("20210829012532_InitialCreate")]
+    [Migration("20210915233228_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,19 +21,33 @@ namespace workout_app.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ExerciseWorkout", b =>
+                {
+                    b.Property<int>("ExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkoutId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExerciseId", "WorkoutId");
+
+                    b.HasIndex("WorkoutId");
+
+                    b.ToTable("ExerciseWorkout");
+                });
+
             modelBuilder.Entity("workout_app.DAL.Models.Exercise", b =>
                 {
-                    b.Property<long>("ExerciseId")
+                    b.Property<int>("ExerciseId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("ExerciseId")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ExerciseName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("MuscleGroupId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("MuscleGroupId")
+                        .HasColumnType("int");
 
                     b.HasKey("ExerciseId");
 
@@ -42,11 +56,42 @@ namespace workout_app.Migrations
                     b.ToTable("Exercises");
                 });
 
+            modelBuilder.Entity("workout_app.DAL.Models.ExerciseWorkout", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Reps")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkoutId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.HasIndex("WorkoutId");
+
+                    b.ToTable("ExerciseWorkouts");
+                });
+
             modelBuilder.Entity("workout_app.DAL.Models.MuscleGroup", b =>
                 {
-                    b.Property<long>("MuscleGroupId")
+                    b.Property<int>("MuscleGroupId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("MuscleGroupName")
@@ -59,9 +104,9 @@ namespace workout_app.Migrations
 
             modelBuilder.Entity("workout_app.DAL.Models.TrainingPlan", b =>
                 {
-                    b.Property<long>("TrainingPlanId")
+                    b.Property<int>("TrainingPlanId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("EndDate")
@@ -76,8 +121,8 @@ namespace workout_app.Migrations
                     b.Property<int>("WorkoutLength")
                         .HasColumnType("int");
 
-                    b.Property<long>("WorkoutTypeId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("WorkoutTypeId")
+                        .HasColumnType("int");
 
                     b.Property<int>("WorkoutsPerWeek")
                         .HasColumnType("int");
@@ -91,7 +136,7 @@ namespace workout_app.Migrations
 
             modelBuilder.Entity("workout_app.DAL.Models.Workout", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("WorkoutId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -99,94 +144,21 @@ namespace workout_app.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ExerciseId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("ExercisesExerciseId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Reps")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("TrainingPlanId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("WeekId")
+                    b.Property<int>("TrainingPlanId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Weight")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkoutDayId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExercisesExerciseId");
+                    b.HasKey("WorkoutId");
 
                     b.HasIndex("TrainingPlanId");
 
                     b.ToTable("Workouts");
                 });
 
-            modelBuilder.Entity("workout_app.DAL.Models.WorkoutSession", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Exercise1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Exercise2")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Exercise3")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Exercise4")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Exercise5")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Exercise6")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Exercise7")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Exercise8")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Exercise9")
-                        .HasColumnType("int");
-
-                    b.Property<long>("TrainingPlanId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("WeekId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("WorkoutDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("WorkoutDayId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TrainingPlanId");
-
-                    b.ToTable("WorkoutSessions");
-                });
-
             modelBuilder.Entity("workout_app.DAL.Models.WorkoutType", b =>
                 {
-                    b.Property<long>("WorkoutTypeId")
+                    b.Property<int>("WorkoutTypeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("WorkoutTypeName")
@@ -197,15 +169,49 @@ namespace workout_app.Migrations
                     b.ToTable("WorkoutTypes");
                 });
 
+            modelBuilder.Entity("ExerciseWorkout", b =>
+                {
+                    b.HasOne("workout_app.DAL.Models.Exercise", null)
+                        .WithMany()
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("workout_app.DAL.Models.Workout", null)
+                        .WithMany()
+                        .HasForeignKey("WorkoutId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("workout_app.DAL.Models.Exercise", b =>
                 {
-                    b.HasOne("workout_app.DAL.Models.MuscleGroup", "MuscleGroups")
-                        .WithMany("Exercises")
+                    b.HasOne("workout_app.DAL.Models.MuscleGroup", "MuscleGroup")
+                        .WithMany("Exercise")
                         .HasForeignKey("MuscleGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("MuscleGroups");
+                    b.Navigation("MuscleGroup");
+                });
+
+            modelBuilder.Entity("workout_app.DAL.Models.ExerciseWorkout", b =>
+                {
+                    b.HasOne("workout_app.DAL.Models.Exercise", "Exercise")
+                        .WithMany()
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("workout_app.DAL.Models.Workout", "Workout")
+                        .WithMany()
+                        .HasForeignKey("WorkoutId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+
+                    b.Navigation("Workout");
                 });
 
             modelBuilder.Entity("workout_app.DAL.Models.TrainingPlan", b =>
@@ -221,40 +227,18 @@ namespace workout_app.Migrations
 
             modelBuilder.Entity("workout_app.DAL.Models.Workout", b =>
                 {
-                    b.HasOne("workout_app.DAL.Models.Exercise", "Exercises")
-                        .WithMany("Workouts")
-                        .HasForeignKey("ExercisesExerciseId");
-
                     b.HasOne("workout_app.DAL.Models.TrainingPlan", "TrainingPlan")
                         .WithMany("Workout")
                         .HasForeignKey("TrainingPlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Exercises");
-
                     b.Navigation("TrainingPlan");
-                });
-
-            modelBuilder.Entity("workout_app.DAL.Models.WorkoutSession", b =>
-                {
-                    b.HasOne("workout_app.DAL.Models.TrainingPlan", "TrainingPlan")
-                        .WithMany()
-                        .HasForeignKey("TrainingPlanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TrainingPlan");
-                });
-
-            modelBuilder.Entity("workout_app.DAL.Models.Exercise", b =>
-                {
-                    b.Navigation("Workouts");
                 });
 
             modelBuilder.Entity("workout_app.DAL.Models.MuscleGroup", b =>
                 {
-                    b.Navigation("Exercises");
+                    b.Navigation("Exercise");
                 });
 
             modelBuilder.Entity("workout_app.DAL.Models.TrainingPlan", b =>

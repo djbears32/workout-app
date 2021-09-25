@@ -11,7 +11,7 @@ namespace workout_app.Migrations
                 name: "MuscleGroups",
                 columns: table => new
                 {
-                    MuscleGroupId = table.Column<long>(type: "bigint", nullable: false)
+                    MuscleGroupId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MuscleGroupName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -24,7 +24,7 @@ namespace workout_app.Migrations
                 name: "WorkoutTypes",
                 columns: table => new
                 {
-                    WorkoutTypeId = table.Column<long>(type: "bigint", nullable: false)
+                    WorkoutTypeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     WorkoutTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -37,10 +37,10 @@ namespace workout_app.Migrations
                 name: "Exercises",
                 columns: table => new
                 {
-                    ExerciseId = table.Column<long>(type: "bigint", nullable: false)
+                    ExerciseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ExerciseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MuscleGroupId = table.Column<long>(type: "bigint", nullable: false)
+                    MuscleGroupId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,14 +57,14 @@ namespace workout_app.Migrations
                 name: "TrainingPlans",
                 columns: table => new
                 {
-                    TrainingPlanId = table.Column<long>(type: "bigint", nullable: false)
+                    TrainingPlanId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TrainingPlanName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     WorkoutLength = table.Column<int>(type: "int", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     WorkoutsPerWeek = table.Column<int>(type: "int", nullable: false),
-                    WorkoutTypeId = table.Column<long>(type: "bigint", nullable: false)
+                    WorkoutTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,26 +81,14 @@ namespace workout_app.Migrations
                 name: "Workouts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    WorkoutId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TrainingPlanId = table.Column<long>(type: "bigint", nullable: false),
-                    WeekId = table.Column<int>(type: "int", nullable: false),
-                    WorkoutDayId = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Weight = table.Column<int>(type: "int", nullable: false),
-                    Reps = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExerciseId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ExercisesExerciseId = table.Column<long>(type: "bigint", nullable: true)
+                    TrainingPlanId = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Workouts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Workouts_Exercises_ExercisesExerciseId",
-                        column: x => x.ExercisesExerciseId,
-                        principalTable: "Exercises",
-                        principalColumn: "ExerciseId",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Workouts", x => x.WorkoutId);
                     table.ForeignKey(
                         name: "FK_Workouts_TrainingPlans_TrainingPlanId",
                         column: x => x.TrainingPlanId,
@@ -110,33 +98,55 @@ namespace workout_app.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkoutSessions",
+                name: "ExerciseWorkout",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TrainingPlanId = table.Column<long>(type: "bigint", nullable: false),
-                    WorkoutDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    WeekId = table.Column<int>(type: "int", nullable: false),
-                    WorkoutDayId = table.Column<int>(type: "int", nullable: false),
-                    Exercise1 = table.Column<int>(type: "int", nullable: false),
-                    Exercise2 = table.Column<int>(type: "int", nullable: false),
-                    Exercise3 = table.Column<int>(type: "int", nullable: false),
-                    Exercise4 = table.Column<int>(type: "int", nullable: false),
-                    Exercise5 = table.Column<int>(type: "int", nullable: false),
-                    Exercise6 = table.Column<int>(type: "int", nullable: false),
-                    Exercise7 = table.Column<int>(type: "int", nullable: false),
-                    Exercise8 = table.Column<int>(type: "int", nullable: false),
-                    Exercise9 = table.Column<int>(type: "int", nullable: false)
+                    ExerciseId = table.Column<int>(type: "int", nullable: false),
+                    WorkoutId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkoutSessions", x => x.Id);
+                    table.PrimaryKey("PK_ExerciseWorkout", x => new { x.ExerciseId, x.WorkoutId });
                     table.ForeignKey(
-                        name: "FK_WorkoutSessions_TrainingPlans_TrainingPlanId",
-                        column: x => x.TrainingPlanId,
-                        principalTable: "TrainingPlans",
-                        principalColumn: "TrainingPlanId",
+                        name: "FK_ExerciseWorkout_Exercises_ExerciseId",
+                        column: x => x.ExerciseId,
+                        principalTable: "Exercises",
+                        principalColumn: "ExerciseId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExerciseWorkout_Workouts_WorkoutId",
+                        column: x => x.WorkoutId,
+                        principalTable: "Workouts",
+                        principalColumn: "WorkoutId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExerciseWorkouts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WorkoutId = table.Column<int>(type: "int", nullable: false),
+                    ExerciseId = table.Column<int>(type: "int", nullable: false),
+                    Weight = table.Column<int>(type: "int", nullable: false),
+                    Reps = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExerciseWorkouts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ExerciseWorkouts_Exercises_ExerciseId",
+                        column: x => x.ExerciseId,
+                        principalTable: "Exercises",
+                        principalColumn: "ExerciseId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExerciseWorkouts_Workouts_WorkoutId",
+                        column: x => x.WorkoutId,
+                        principalTable: "Workouts",
+                        principalColumn: "WorkoutId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -146,42 +156,50 @@ namespace workout_app.Migrations
                 column: "MuscleGroupId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ExerciseWorkout_WorkoutId",
+                table: "ExerciseWorkout",
+                column: "WorkoutId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExerciseWorkouts_ExerciseId",
+                table: "ExerciseWorkouts",
+                column: "ExerciseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExerciseWorkouts_WorkoutId",
+                table: "ExerciseWorkouts",
+                column: "WorkoutId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TrainingPlans_WorkoutTypeId",
                 table: "TrainingPlans",
                 column: "WorkoutTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Workouts_ExercisesExerciseId",
-                table: "Workouts",
-                column: "ExercisesExerciseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Workouts_TrainingPlanId",
                 table: "Workouts",
-                column: "TrainingPlanId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkoutSessions_TrainingPlanId",
-                table: "WorkoutSessions",
                 column: "TrainingPlanId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Workouts");
+                name: "ExerciseWorkout");
 
             migrationBuilder.DropTable(
-                name: "WorkoutSessions");
+                name: "ExerciseWorkouts");
 
             migrationBuilder.DropTable(
                 name: "Exercises");
 
             migrationBuilder.DropTable(
-                name: "TrainingPlans");
+                name: "Workouts");
 
             migrationBuilder.DropTable(
                 name: "MuscleGroups");
+
+            migrationBuilder.DropTable(
+                name: "TrainingPlans");
 
             migrationBuilder.DropTable(
                 name: "WorkoutTypes");

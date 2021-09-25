@@ -1,6 +1,6 @@
 <h3 class="title text-center">Select Training Plan</h3>
 
-<form *ngIf="editFieldsForm" [hidden]="saving || isLoadingData" [fromGroup]="editFieldsForm">
+<form [hidden]="saving || isLoadingData" [fromGroup]="editFieldsForm">
   <mat-form-field class="fullWidthField" appearance="fill" color="accent">
     <mat-label>Training Plan</mat-label>
     <mat-select formControlName="trainingPlanId" (selectionChange)="valueChanged()">
@@ -11,49 +11,32 @@
     </mat-select>
   </mat-form-field>
 
-  <!--*ngIf="editFieldsForm.controls.trainingPlanId.$dirty"-->
   <div>
     <h2>Workout {{ currentWorkout }} of {{ workoutsWeekly ? workoutsWeekly : '0' }}</h2>
     <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.sm="column" fxLayout.xs="column">
       <div fxFlex="1 1 20%">
-        <mat-label class="exercise"> Exercise 1</mat-label>
-        <p>{{ exerciseHolder.exerciseName }}</p>
-        <button class="btn btn-primary" mat-raised-button (click)="openExerciseSearchDialog()" title="Edit Training Plan">
-          <mat-icon aria-hidden="false" matTooltip="Add Workouts">Add Exercise</mat-icon>
-        </button>
-      </div>
+        <mat-label class="exercise"> Exercise </mat-label>
+        <h6>{{ exerciseHolder.exerciseName }}</h6>
+        <div fxFlex="1 1 20%">
+          <mat-form-field class="fullWidthField" color="accent">
+            <mat-label class="reps">Reps</mat-label>
+            <input type="text" matInput formControlName="reps" required />
+          </mat-form-field>
+        </div>
 
-      <div fxFlex="1 1 20%">
-        <mat-label class="exercise"> Exercise 1</mat-label>
-        <p>{{ exerciseHolder.exerciseName }}</p>
-        <button class="btn btn-primary" mat-raised-button (click)="openExerciseSearchDialog()" title="Edit Training Plan">
-          <mat-icon aria-hidden="false" matTooltip="Add Workouts">Add Exercise</mat-icon>
-        </button>
       </div>
-      <div fxFlex="1 1 20%">
-        <mat-label class="exercise"> Exercise 1</mat-label>
-        <p>{{ exerciseHolder.exerciseName }}</p>
-        <button class="btn btn-primary" mat-raised-button (click)="openExerciseSearchDialog()" title="Edit Training Plan">
-          <mat-icon aria-hidden="false" matTooltip="Add Workouts">Add Exercise</mat-icon>
-        </button>
-      </div>
-      <div fxFlex="1 1 20%">
-        <mat-label class="exercise"> Exercise 1</mat-label>
-        <p>{{ exerciseHolder.exerciseName }}</p>
-        <button class="btn btn-primary" mat-raised-button (click)="openExerciseSearchDialog()" title="Edit Training Plan">
-          <mat-icon aria-hidden="false" matTooltip="Add Workouts">Add Exercise</mat-icon>
-        </button>
-      </div>
-      <div fxFlex="1 1 20%">
-        <mat-label class="exercise"> Exercise 1</mat-label>
-        <p>{{ exerciseHolder.exerciseName }}</p>
-        <button class="btn btn-primary" mat-raised-button (click)="openExerciseSearchDialog()" title="Edit Training Plan">
-          <mat-icon aria-hidden="false" matTooltip="Add Workouts">Add Exercise</mat-icon>
-        </button>
-      </div>
+      <button class="btn btn-primary" mat-raised-button (click)="openExerciseSearchDialog()" title="Edit Training Plan">
+        Add Exercise
+      </button>
+
+    </div>
 
       <span class="material-icons">ef3d</span>
 
-    </div>
+      <button class="btn btn-primary" mat-raised-button (click)="submitEdit()" title="Testing">
+        test
+      </button>
+
+    
   </div>
 </form>

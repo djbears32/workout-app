@@ -19,7 +19,7 @@ namespace workout_app.DAL.Models
         public virtual DbSet<Workout> Workouts { get; set; }
         public virtual DbSet<Exercise> Exercises { get; set; }
         public virtual DbSet<MuscleGroup> MuscleGroups { get; set; }
-        public virtual DbSet<WorkoutSession> WorkoutSessions { get; set; }
+        public virtual DbSet<ExerciseWorkout> ExerciseWorkouts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -31,11 +31,10 @@ namespace workout_app.DAL.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Exercise>(entity => 
-            {
-                entity.Property( e => e.ExerciseId)
-                    .HasColumnName("ExerciseId");
-            });
+            //modelBuilder.Entity<ExerciseWorkout>(entity => 
+            //{
+            //    entity.HasKey( e => new { e.EWInfoId, e.ExerciseId, e.WorkoutId});
+            //});
         }
     }
 }

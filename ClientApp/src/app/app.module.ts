@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BannerComponent } from './banner/banner.component';
 import { AddWorkoutComponent } from './workout/add-workout/add-workout.component';
 import { ViewExerciseComponent } from './exercises/view-exercise/view-exercise.component';
@@ -23,12 +22,12 @@ import { WorkoutLookupDialogComponent } from './workout/workout-lookup-dialog/wo
 import { ExerciseLookupDialogComponent } from './exercises/exercise-lookup-dialog/exercise-lookup-dialog.component';
 import { AddMuscleGroupsComponent } from './exercises/add-muscle-groups/add-muscle-groups.component';
 import { EditTrainingPlanComponent } from './training-plan/edit-training-plan/edit-training-plan.component';
+import { AddWorkoutTypeComponent } from './training-plan/add-workout-type/add-workout-type.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    FetchDataComponent,
     BannerComponent,
     AddWorkoutComponent,
     ViewExerciseComponent,
@@ -39,7 +38,8 @@ import { EditTrainingPlanComponent } from './training-plan/edit-training-plan/ed
     WorkoutLookupDialogComponent,
     ExerciseLookupDialogComponent,
     AddMuscleGroupsComponent,
-    EditTrainingPlanComponent
+    EditTrainingPlanComponent,
+    AddWorkoutTypeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,7 +58,6 @@ import { EditTrainingPlanComponent } from './training-plan/edit-training-plan/ed
     FlexLayoutModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'add-workout', component: AddWorkoutComponent },
       { path: 'view-exercise', component: ViewExerciseComponent },
       { path: 'view-training-plan', component: ViewTrainingPlanComponent },

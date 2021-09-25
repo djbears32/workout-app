@@ -3,9 +3,10 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { ExerciseLookupDialogComponent } from '../../exercises/exercise-lookup-dialog/exercise-lookup-dialog.component';
-import { IExercises } from '../../models/IExcercises';
+import { IExercises } from '../../models/IExercises';
+import { IExerciseWorkout } from '../../models/IExerciseWorkout';
 import { ITrainingPlan } from '../../models/ITrainingPlan';
-import { IWorkoutSession } from '../../models/IWorkoutSession';
+import { IWorkout } from '../../models/IWorkout';
 import { WorkoutService } from '../../services/workout.services';
 
 @Component({
@@ -22,65 +23,74 @@ export class EditTrainingPlanComponent implements OnInit {
   saving = false;
   workoutsWeekly = 0;  //stores trainingplan.workoutsperweek value set by user in first dropdown
   currentWorkout = 1; //stores current workoutsession value
-  exerciseHolder = {} as IExercises[]; //stores exercise returned from add exercises dialog
+
+  exerciseWorkoutData: IExerciseWorkout = {
+  id: 0,
+  workoutId: 0,
+  exerciseId: 0,
+  weight: null,
+  reps: null,
+  inactive: true
+  } //generic model passed to form group
+
+  workoutData: IWorkout = {
+    workoutId: 0,
+    trainingPlanId: 0,
+    date: null
+  }
+
+  exerciseHolder = {} as IExercises; //stores exercise returned from add exercises dialog
 
   trainingPlans = {} as ITrainingPlan[];
-  workoutSessions = {} as IWorkoutSession[];
 
   editFieldsForm: FormGroup;
 
 
   constructor(private workoutService: WorkoutService,
-    private dialog: MatDialog ) { }
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder  ) { }
 
   ngOnInit() {
     this.loadDropdown();
-    this.getWorkoutSession();
 
-    this.editFieldsForm = new FormGroup({
-      id: new FormControl('-1'),
-      trainingPlanId:  new FormControl(''),
-      workoutDate: new FormControl(''),
-      weekId: new FormControl(''),
-      workoutDayId: new FormControl(''),
-      exercise1: new FormControl(''),
-      exercise2: new FormControl(''),
-      exercise3: new FormControl(''),
-      exercise4: new FormControl(''),
-      exercise5: new FormControl(''),
-      exercise6: new FormControl(''),
-      exercise7: new FormControl(''),
-      exercise8: new FormControl(''),
-      exercise9: new FormControl('')
-    })
+    this.editFieldsForm = this.formBuilder.group({
+      id: [this.exerciseWorkoutData.id],
+      workoutId: [this.exerciseWorkoutData.workoutId],
+      exerciseId: [this.exerciseWorkoutData.exerciseId]
+    });
   }
 
   submitEdit() {
     this.saving = true;
-    let submittedForm: IWorkoutSession = {
+    let submittedForm: IExerciseWorkout = {
       id: -1,
-      trainingPlanId: this.editFieldsForm.get('trainingPlanId').value,
-      workoutDate: this.editFieldsForm.get('workoutDate').value,
-      weekId: this.editFieldsForm.get('weekId').value,
-      workoutDayId: this.editFieldsForm.get('workoutDayId').value,
-      exercise1: this.editFieldsForm.get('exercise1').value,
-      exercise2: this.editFieldsForm.get('exercise2').value,
-      exercise3: this.editFieldsForm.get('exercise3').value,
-      exercise4: this.editFieldsForm.get('exercise4').value,
-      exercise5: this.editFieldsForm.get('exercise5').value,
-      exercise6: this.editFieldsForm.get('exercise6').value,
-      exercise7: this.editFieldsForm.get('exercise7').value,
-      exercise8: this.editFieldsForm.get('exercise8').value,
-      exercise9: this.editFieldsForm.get('exercise9').value,
+      workoutId: -1,
+      exerciseId: this.editFieldsForm.get('exerciseId').value,
+      weight: null,
+      reps: this.editFieldsForm.get('reps').value,
+      inactive: false
     }
+    console.log(submittedForm);
+      //this.workoutService.updateExercises(submittedForm)
+      //.pipe(
+      //  finalize(() => { this.saving = false })
+      //)
+      //.subscribe(
+      //  () => this.completeFormSubmission(),
+      //  (error: Error) => this.errorMessage = error.message);
 
-    this.workoutService.updateWorkoutSessions(submittedForm)
-      .pipe(
-        finalize(() => { this.saving = false })
-    )
-      .subscribe(
-        () => this.completeFormSubmission(),
-        (error: Error) => this.errorMessage = error.message);
+    //let submittedForm1: IWorkout = {
+    //  workoutId: -1,
+    //  trainingPlanId: this.editFieldsForm.get('trainingPlanId').value,
+    //  date: null
+    //}
+    //this.workoutService.updateExercises(submittedForm)
+      //.pipe(
+      //  finalize(() => { this.saving = false })
+      //)
+      //.subscribe(
+      //  () => this.completeFormSubmission(),
+      //  (error: Error) => this.errorMessage = error.message);
   }
 
   completeFormSubmission() {
@@ -102,17 +112,6 @@ export class EditTrainingPlanComponent implements OnInit {
         (error: Error) => this.errorMessage = error.message);
   }
 
-  getWorkoutSession() {
-    this.workoutService.getWorkoutSessions().pipe(
-      finalize(() => this.isLoadingData = false)
-    )
-      .subscribe((workoutSession: IWorkoutSession[]) => {
-        this.workoutSessions = workoutSession;
-        console.log(this.workoutSessions)
-      },
-        (error: Error) => this.errorMessage = error.message);
-  }
-
   openExerciseSearchDialog() {
 
     const dialogRef = this.dialog.open(ExerciseLookupDialogComponent, { width: '1000px'});
@@ -120,11 +119,12 @@ export class EditTrainingPlanComponent implements OnInit {
     dialogRef.afterClosed()
       .pipe()
       .subscribe(results => {
+        if (results) {
+          this.editFieldsForm.get('exerciseId').setValue(results.exerciseId);
+          this.editFieldsForm.get('muscleGroupId').setValue(results.muscleGroupId);
+        }
         this.exerciseHolder = results;
       })
-
-    //if (this.editFieldsForm.exercise1 == null)
-
-
+    console.log(this.exerciseHolder);
   }
 }
