@@ -56,7 +56,9 @@ export class EditTrainingPlanComponent implements OnInit {
     this.editFieldsForm = this.formBuilder.group({
       id: [this.exerciseWorkoutData.id],
       workoutId: [this.exerciseWorkoutData.workoutId],
-      exerciseId: [this.exerciseWorkoutData.exerciseId]
+      exerciseId: [this.exerciseWorkoutData.exerciseId],
+      reps: [this.exerciseWorkoutData.reps],
+      trainingPlanId: [this.workoutData.trainingPlanId]
     });
   }
 
@@ -79,11 +81,11 @@ export class EditTrainingPlanComponent implements OnInit {
       //  () => this.completeFormSubmission(),
       //  (error: Error) => this.errorMessage = error.message);
 
-    //let submittedForm1: IWorkout = {
-    //  workoutId: -1,
-    //  trainingPlanId: this.editFieldsForm.get('trainingPlanId').value,
-    //  date: null
-    //}
+    let submittedForm1: IWorkout = {
+      workoutId: -1,
+      trainingPlanId: this.editFieldsForm.get('trainingPlanId').value,
+      date: null
+    }
     //this.workoutService.updateExercises(submittedForm)
       //.pipe(
       //  finalize(() => { this.saving = false })
@@ -118,13 +120,14 @@ export class EditTrainingPlanComponent implements OnInit {
 
     dialogRef.afterClosed()
       .pipe()
-      .subscribe(results => {
+      .subscribe((results: IExercises) => {
         if (results) {
           this.editFieldsForm.get('exerciseId').setValue(results.exerciseId);
-          this.editFieldsForm.get('muscleGroupId').setValue(results.muscleGroupId);
+          //this.editFieldsForm.get('muscleGroupId').setValue(results.muscleGroupId);
         }
+        console.log(this.exerciseHolder);
         this.exerciseHolder = results;
       })
-    console.log(this.exerciseHolder);
+    
   }
 }

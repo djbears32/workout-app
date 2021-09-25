@@ -1,6 +1,5 @@
 <h3 class="title text-center">Add Exercise</h3>
 <form class="contentContainer" [formGroup]="editFieldsForm" (ngSubmit)="submitEdit()">
-    <div>
         <div fxLayoutAlign="center"
             fxLayoutGap="20px"
             fxlayoutAlign="space-between"
@@ -12,7 +11,6 @@
                     <input type="text" matInput formControlName="exerciseName" required/> 
                 </mat-form-field>
             </div>
-
             <div>
                 <mat-form-field class="fullWidthField" appearance="fill" color="accent">
                     <mat-label>Muscle Group</mat-label>
@@ -24,9 +22,7 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-
         </div>
-    </div>
     <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="25px">
         <div>
             <button class="btn btn-primary" type="submit" mat-raised-button [disabled]="editFieldsForm.invalid">Submit</button>
