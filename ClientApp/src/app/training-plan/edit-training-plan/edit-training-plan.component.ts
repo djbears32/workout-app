@@ -39,7 +39,7 @@ export class EditTrainingPlanComponent implements OnInit {
     date: null
   }
 
-  exerciseHolder = {} as IExercises[]; //stores exercise returned from add exercises dialog
+  exerciseHolder = {} as IExercises; //stores exercise returned from add exercises dialog
 
   trainingPlans = {} as ITrainingPlan[];
 
@@ -67,29 +67,30 @@ export class EditTrainingPlanComponent implements OnInit {
       workoutId: -1,
       exerciseId: this.editFieldsForm.get('exerciseId').value,
       weight: null,
-      reps: null,
-      inactive: true
+      reps: this.editFieldsForm.get('reps').value,
+      inactive: false
     }
+    console.log(submittedForm);
       //this.workoutService.updateExercises(submittedForm)
-      .pipe(
-        finalize(() => { this.saving = false })
-      )
-      .subscribe(
-        () => this.completeFormSubmission(),
-        (error: Error) => this.errorMessage = error.message);
+      //.pipe(
+      //  finalize(() => { this.saving = false })
+      //)
+      //.subscribe(
+      //  () => this.completeFormSubmission(),
+      //  (error: Error) => this.errorMessage = error.message);
 
-    let submittedFrom: IWorkout = {
-      workoutId: -1,
-      trainingPlanId: 0,
-      date: null
-    }
+    //let submittedForm1: IWorkout = {
+    //  workoutId: -1,
+    //  trainingPlanId: this.editFieldsForm.get('trainingPlanId').value,
+    //  date: null
+    //}
     //this.workoutService.updateExercises(submittedForm)
-      .pipe(
-        finalize(() => { this.saving = false })
-      )
-      .subscribe(
-        () => this.completeFormSubmission(),
-        (error: Error) => this.errorMessage = error.message);
+      //.pipe(
+      //  finalize(() => { this.saving = false })
+      //)
+      //.subscribe(
+      //  () => this.completeFormSubmission(),
+      //  (error: Error) => this.errorMessage = error.message);
   }
 
   completeFormSubmission() {
@@ -118,8 +119,12 @@ export class EditTrainingPlanComponent implements OnInit {
     dialogRef.afterClosed()
       .pipe()
       .subscribe(results => {
+        if (results) {
+          this.editFieldsForm.get('exerciseId').setValue(results.exerciseId);
+          this.editFieldsForm.get('muscleGroupId').setValue(results.muscleGroupId);
+        }
         this.exerciseHolder = results;
       })
-
+    console.log(this.exerciseHolder);
   }
 }
