@@ -38,6 +38,7 @@ namespace workout_app
             services.AddTransient<DAL.Repositories.IMuscleGroupRepository, DAL.Repositories.MuscleGroupRepository>();
             services.AddTransient<DAL.Repositories.ITrainingPlanRepository, DAL.Repositories.TrainingPlanRepository>();
             services.AddTransient<DAL.Repositories.IWorkoutTypeRepository, DAL.Repositories.WorkoutTypeRepository>();
+            services.AddTransient<DAL.Repositories.IWorkoutRepository, DAL.Repositories.WorkoutRepository>();
 
             services.AddTransient<API.IExerciseAPI, API.ExerciseAPI>();
         }

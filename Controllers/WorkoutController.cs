@@ -128,5 +128,19 @@ namespace workout_app.Controllers
                 return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Adding workout types failed");
             }
         }
+
+        [HttpPost("addworkouts")]
+        public ActionResult AddWorkouts(WorkoutViewModel vm)
+        {
+            try
+            {
+                this.exerciseAPI.AddWorkouts(vm);
+               return Ok();
+            }
+            catch
+            {
+                return StatusCode((int)System.Net.HttpStatusCode.InternalServerError, "Adding workouts failed");
+            }
+        }
     }
 }

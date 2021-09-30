@@ -54,4 +54,9 @@ export class WorkoutService {
     var apiUrl = 'api/workout/addworkouttypes';
     return this.httpClient.post(apiUrl, workoutTypeData);
   }
+
+  updateWorkouts(workoutsData) {
+    var apiUrl = 'api/workout/addworkouts';
+    return this.httpClient.post(apiUrl, workoutsData);
+  }
 }

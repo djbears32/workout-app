@@ -23,6 +23,7 @@ export class EditTrainingPlanComponent implements OnInit {
   saving = false;
   workoutsWeekly = 0;  //stores trainingplan.workoutsperweek value set by user in first dropdown
   currentWorkout = 1; //stores current workoutsession value
+  isEditTrainingPlan = false;
 
   exerciseWorkoutData: IExerciseWorkout = {
   id: 0,
@@ -62,17 +63,34 @@ export class EditTrainingPlanComponent implements OnInit {
     });
   }
 
-  submitEdit() {
-    this.saving = true;
-    let submittedForm: IExerciseWorkout = {
-      id: -1,
+  submitWorkout() {
+    this.isEditTrainingPlan = true;
+
+    let submittedForm1: IWorkout = {
       workoutId: -1,
-      exerciseId: this.editFieldsForm.get('exerciseId').value,
-      weight: null,
-      reps: this.editFieldsForm.get('reps').value,
-      inactive: false
+      trainingPlanId: this.editFieldsForm.get('trainingPlanId').value,
+      date: null
     }
-    console.log(submittedForm);
+    this.workoutService.updateWorkouts(submittedForm1)
+      .pipe(
+        finalize(() => { this.saving = false })
+      )
+      .subscribe(
+        () => this.completeFormSubmission(),
+        (error: Error) => this.errorMessage = error.message);
+  }
+
+  //submitEdit() {
+  //  this.saving = true;
+  //  let submittedForm: IExerciseWorkout = {
+  //    id: -1,
+  //    workoutId: -1,
+  //    exerciseId: this.editFieldsForm.get('exerciseId').value,
+  //    weight: null,
+  //    reps: this.editFieldsForm.get('reps').value,
+  //    inactive: false
+  //  }
+  //  console.log(submittedForm);
       //this.workoutService.updateExercises(submittedForm)
       //.pipe(
       //  finalize(() => { this.saving = false })
@@ -80,20 +98,7 @@ export class EditTrainingPlanComponent implements OnInit {
       //.subscribe(
       //  () => this.completeFormSubmission(),
       //  (error: Error) => this.errorMessage = error.message);
-
-    let submittedForm1: IWorkout = {
-      workoutId: -1,
-      trainingPlanId: this.editFieldsForm.get('trainingPlanId').value,
-      date: null
-    }
-    //this.workoutService.updateExercises(submittedForm)
-      //.pipe(
-      //  finalize(() => { this.saving = false })
-      //)
-      //.subscribe(
-      //  () => this.completeFormSubmission(),
-      //  (error: Error) => this.errorMessage = error.message);
-  }
+  //}
 
   completeFormSubmission() {
     this.editClosed.emit();

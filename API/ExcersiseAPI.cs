@@ -12,19 +12,22 @@ namespace workout_app.API
         DAL.Repositories.IMuscleGroupRepository muscleGroupRepo;
         DAL.Repositories.ITrainingPlanRepository trainingPlanRepo;
         DAL.Repositories.IWorkoutTypeRepository workoutTypeRepo;
+        DAL.Repositories.IWorkoutRepository workoutRepo;
 
         public ExerciseAPI(
             DAL.UnitOfWork.IUnitOfWork unitOfWork,
             DAL.Repositories.IExerciseRepository exerciseRepo,
             DAL.Repositories.IMuscleGroupRepository muscleGroupRepo,
             DAL.Repositories.ITrainingPlanRepository trainingPlanRepo,
-            DAL.Repositories.IWorkoutTypeRepository workoutTypeRepo)
+            DAL.Repositories.IWorkoutTypeRepository workoutTypeRepo,
+            DAL.Repositories.IWorkoutRepository workoutRepo)
             {
                 this.unitOfWork = unitOfWork;
                 this.exerciseRepo = exerciseRepo;
                 this.muscleGroupRepo = muscleGroupRepo;
                 this.trainingPlanRepo = trainingPlanRepo;
                 this.workoutTypeRepo = workoutTypeRepo;
+                this.workoutRepo = workoutRepo;
             }
         public List<ViewModels.ExerciseViewModel> GetExercises()
         {
@@ -188,5 +191,18 @@ namespace workout_app.API
             this.workoutTypeRepo.Add(workoutTypeEntity);
             this.unitOfWork.Commit();
         }
+
+        public void AddWorkouts(ViewModels.WorkoutViewModel workoutInfoForm)
+        {
+                var workoutEntity = new Workout
+                {
+                    WorkoutId = workoutInfoForm.WorkoutId,
+                    TrainingPlanId = workoutInfoForm.TrainingPlanId,
+                    Date = workoutInfoForm.Date
+                };
+
+                this.workoutRepo.Add(workoutEntity);
+                this.unitOfWork.Commit();
+            }
+        }
     }
-}

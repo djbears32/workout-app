@@ -13,5 +13,6 @@ namespace workout_app.API
         void addMuscleGroups(ViewModels.MuscleGroupViewModel muscleGroupViewModel);
         void AddTrainingPlans(ViewModels.TrainingPlanViewModel trainingPlanViewModel);
         void AddWorkoutTypes(ViewModels.WorkoutTypeViewModel workoutTypeViewModel);
+        void AddWorkouts(ViewModels.WorkoutViewModel workoutViewModel);
     }
 }
