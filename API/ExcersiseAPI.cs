@@ -180,7 +180,7 @@ namespace workout_app.API
             this.unitOfWork.Commit();
         }
 
-        public void AddWorkoutTypes(ViewModels.WorkoutTypeViewModel workoutTypeInfoForm)
+        public void AddWorkoutTypes(WorkoutTypeViewModel workoutTypeInfoForm)
         {
             var workoutTypeEntity = new WorkoutType
             {
@@ -192,7 +192,7 @@ namespace workout_app.API
             this.unitOfWork.Commit();
         }
 
-        public void AddWorkouts(ViewModels.WorkoutViewModel workoutInfoForm)
+        public void AddWorkouts(WorkoutViewModel workoutInfoForm)
         {
                 var workoutEntity = new Workout
                 {
@@ -203,6 +203,6 @@ namespace workout_app.API
 
                 this.workoutRepo.Add(workoutEntity);
                 this.unitOfWork.Commit();
-            }
         }
     }
+}
